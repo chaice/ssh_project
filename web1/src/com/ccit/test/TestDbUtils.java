@@ -1,10 +1,9 @@
-package com.ccit.utils.dbutils;
+package com.ccit.test;
 
 
-import com.ccit.utils.ConnectionManger;
-import com.ccit.utils.entity.Admin;
+import com.ccit.entity.Admin;
+import com.ccit.entity.ConnectionManger;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.*;
 import org.junit.Test;
 
@@ -18,6 +17,10 @@ import java.util.Set;
 public class TestDbUtils {
     QueryRunner queryRunner = new QueryRunner();
     Connection connection = ConnectionManger.getConnection();
+    @Test
+    public void testConnection(){
+        ConnectionManger.getConnection();
+    }
     @Test
     public void testInsert(){
         String sql = "insert into admin(name,password) values(?,?)";

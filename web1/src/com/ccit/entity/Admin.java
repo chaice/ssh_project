@@ -1,8 +1,5 @@
-package com.ccit.utils.entity;
+package com.ccit.entity;
 
-/**
- * Created by cc on 2016/6/15.
- */
 public class Admin {
     private Integer id;
     private String name;
