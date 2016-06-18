@@ -1,4 +1,5 @@
-.idea
+.idea/
 web1.iml
-out
-lib
+out/
+lib/
+.gitignore

@@ -5,8 +5,9 @@ import com.ccit.entity.Admin;
 import com.ccit.entity.ConnectionManger;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.*;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 import org.junit.Test;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -14,7 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 public class TestDbUtils {
+    Logger logger = Logger.getLogger(TestDbUtils.class);
     QueryRunner queryRunner = new QueryRunner();
     Connection connection = ConnectionManger.getConnection();
     @Test
@@ -24,6 +27,7 @@ public class TestDbUtils {
     @Test
     public void testInsert(){
         String sql = "insert into admin(name,password) values(?,?)";
+        logger.debug("sql{}");
         try {
             queryRunner.update(connection,sql,"lili",123);
         } catch (SQLException e) {

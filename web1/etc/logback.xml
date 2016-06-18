@@ -1,0 +1,41 @@
+<!--<?xm version="1.0" encoding="utf-8" ?>-->
+<configuration>
+    <!--日志输出到控制台-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+<!--&lt;!&ndash;日志输出到文件中&ndash;&gt;-->
+    <!--<appender name="file" class="ch.qos.logback.core.FileAppender">-->
+        <!--&lt;!&ndash;日志文件地址&ndash;&gt;-->
+        <!--<file>D:/logback.log</file>-->
+        <!--&lt;!&ndash;追加模式&ndash;&gt;-->
+        <!--<append>true</append>-->
+        <!--<encoder>-->
+            <!--<pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <!--<root level="debug">-->
+        <!--<appender-ref ref="file" />-->
+    <!--</root>-->
+    <!--&lt;!&ndash;日志按天输出到文件中&ndash;&gt;-->
+    <!--<property name="LOG_HOME" value="D:/logs"/>-->
+    <!--<appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--&lt;!&ndash;日志文件输出的文件名&ndash;&gt;-->
+            <!--<FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.log</FileNamePattern>-->
+            <!--&lt;!&ndash;日志文件保留天数&ndash;&gt;-->
+            <!--<MaxHistory>30</MaxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%d{MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+    <!--<root level="debug">-->
+        <!--<appender-ref ref="rolling" />-->
+    <!--</root>-->
+</configuration>
