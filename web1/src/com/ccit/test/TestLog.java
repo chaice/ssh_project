@@ -13,10 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class TestLog {
     @Test
@@ -44,7 +42,12 @@ public class TestLog {
 
 
 
-
+        //验证码的使用 导入patchca.jar,
+        /*
+        ConfigurableCaptchaService service = new ConfigurableCaptchaService();
+        service.setColorFactory(new SingleColorFactory(new Color(56)));
+        service.setFilterFactory(new CurvesRippleFilterFactory(service.getColorFactory()));
+        */
         ConfigurableCaptchaService service = new ConfigurableCaptchaService();
         service.setColorFactory(new SingleColorFactory(new Color(0x61B6C0)));
         service.setFilterFactory(new CurvesRippleFilterFactory(service.getColorFactory()));
