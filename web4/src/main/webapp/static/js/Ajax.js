@@ -51,6 +51,7 @@ var Ajax = (function(){
         xml.send();
     }
     function doPost(url,object,fn){
+        var ar = arguments;
         var xml = creatAjax();
         xml.open("post",url,true);
         xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -60,7 +61,9 @@ var Ajax = (function(){
                 var status = xml.status;
                 if( status == 200){
                     var result = xml.responseText;
-                    fn(result);
+                    if(ar.length == 2){
+                        ar[1](result);
+                    }
                 }
             }
         }
