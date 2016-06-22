@@ -1,4 +1,6 @@
 package com.ccit.web;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +12,11 @@ import java.io.PrintWriter;
 
 @WebServlet("/ajax.xml")
 public class Index extends HttpServlet {
+    Logger logger = LoggerFactory.getLogger(Index.class);
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       resp.setContentType("text/xml;charset=UTF-8");
+        logger.debug("{}","tom");
         PrintWriter pw = resp.getWriter();
         pw.print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
         pw.print("<users>");
