@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0df5f298-d122-488f-9b96-cf00511ef6f9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/ccit/utils/CacheUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web4/target/classes/com/ccit/servlet/Index.class" afterPath="$PROJECT_DIR$/../web4/target/classes/com/ccit/servlet/Index.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web1/src/com/ccit/test/TestLog.java" afterPath="$PROJECT_DIR$/../web1/src/com/ccit/test/TestLog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../web1/src/com/ccit/web/TestPatch.java" afterPath="$PROJECT_DIR$/../web1/src/com/ccit/web/TestPatch.java" />
@@ -78,7 +76,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="D:\maven_repo" />
-        <option name="mavenHome" value="Bundled (Maven 3)" />
+        <option name="mavenHome" value="E:/tools/apache-maven-3.3.9" />
         <option name="userSettingsFile" value="E:\tools\apache-maven-3.3.9\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -139,6 +137,8 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="JUnit.TestDAO.movieDAO">
     <configuration default="false" name="TestDAO.movieDAO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -674,7 +674,7 @@
       <updated>1466993797105</updated>
       <workItem from="1466993802186" duration="4140000" />
       <workItem from="1466998005180" duration="4152000" />
-      <workItem from="1467003068148" duration="6897000" />
+      <workItem from="1467003068148" duration="7198000" />
     </task>
     <servers />
   </component>
@@ -711,10 +711,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15189000" />
+    <option name="totallyTimeSpent" value="15490000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1378" height="744" extended-state="1" />
+    <frame x="-8" y="0" width="1378" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
