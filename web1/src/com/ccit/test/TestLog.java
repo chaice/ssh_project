@@ -63,11 +63,11 @@ public class TestLog {
         });
         service.setWordFactory(randomWordFactory);
 
-        FileOutputStream outputStream = new FileOutputStream("d:test.png");
-        EncoderHelper.getChallangeAndWriteImage(service,"png",outputStream);
-
-        outputStream.flush();
-        outputStream.close();
+//        FileOutputStream outputStream = new FileOutputStream("d:test.png");
+//        EncoderHelper.getChallangeAndWriteImage(service,"png",outputStream);
+//
+//        outputStream.flush();
+//        outputStream.close();
 
 
 

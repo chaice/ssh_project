@@ -40,6 +40,7 @@ public class TestPatch extends HttpServlet {
 
         OutputStream outputStream = resp.getOutputStream();//使验证码在浏览器页面上显示
         String str = EncoderHelper.getChallangeAndWriteImage(service,"png",outputStream);
+        System.out.println(str);
         HttpSession session = req.getSession();
         session.setAttribute("str",str);
     }
