@@ -9,7 +9,7 @@
     <select id="findAll" resultType="com.ccit.pojo.Movie">
         SELECT * FROM movie
     </select>
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO movie(title,rate,releaseyear,sendtime,daoyan,jianjie)
         VALUES (#{title},#{rate},#{releaseyear},#{sendtime},#{daoyan},#{jianjie})
     </insert>
@@ -19,4 +19,45 @@
     <delete id="deleteById">
         DELETE FROM movie WHERE id = #{id}
     </delete>
+    <select id="findMap" parameterType="map" resultType="com.ccit.pojo.Movie"><!--使用map传入多个参数 -->
+        SELECT * FROM movie WHERE title=#{title} AND daoyan=#{daoyan}
+    </select>
+    <select id="findParam" resultType="com.ccit.pojo.Movie"><!--传入多个参数 -->
+        SELECT * FROM movie WHERE title=#{param1} AND daoyan=#{param2}
+    </select>
+    <select id="findPage" resultType="com.ccit.pojo.Movie"><!--分页查询 -->
+        SELECT * FROM movie limit #{param1},#{param2}
+    </select>
+    <select id="findByIds" resultType="com.ccit.pojo.Movie"><!--多个查询 -->
+        SELECT * FROM movie WHERE id IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <insert id="inserts" parameterType="com.ccit.pojo.Movie"><!--一次插入多个 -->
+        INSERT INTO movie(title,rate,releaseyear,sendtime,daoyan,jianjie) VALUES
+        <foreach collection="list" item="movie" separator=",">
+            (#{movie.title},#{movie.rate},#{movie.releaseyear},#{movie.sendtime},#{movie.daoyan},#{movie.jianjie})
+        </foreach>
+    </insert>
+    <delete id="deleteByIds" parameterType="int"><!--一次删除多个纪录 -->
+        DELETE FROM movie WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="findByIf" resultType="com.ccit.pojo.Movie" parameterType="map"><!--条件选择 -->
+        select * from movie
+        <where>
+            <if test="title != null and title != ''">
+                title = #{title}
+            </if>
+            <if test="rate != null">
+                and rate = #{rate}
+            </if>
+            <if test="daoyan != null">
+                and daoyan = #{daoyan}
+            </if>
+        </where>
+    </select>
 </mapper>

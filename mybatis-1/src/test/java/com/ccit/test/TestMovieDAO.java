@@ -10,8 +10,7 @@ public class TestMovieDAO {
     private MovieDAO nd = new MovieDAO();
     @Test
     public void testInsert(){
-        Movie movie = new Movie();
-        movie.setTitle("三毛流浪记");
+        Movie movie = new Movie("三毛流浪记");
         movie.setReleaseyear("1998");
         nd.insert(movie);
     }
