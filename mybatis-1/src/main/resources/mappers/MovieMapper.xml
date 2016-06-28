@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccit.mappers.MovieMapper">
+    <select id="findById" resultType="com.ccit.pojo.Movie">
+        SELECT * FROM movie WHERE id = #{id}
+    </select>
+    <select id="findAll" resultType="com.ccit.pojo.Movie">
+        SELECT * FROM movie
+    </select>
+    <insert id="insert">
+        INSERT INTO movie(title,rate,releaseyear,sendtime,daoyan,jianjie)
+        VALUES (#{title},#{rate},#{releaseyear},#{sendtime},#{daoyan},#{jianjie})
+    </insert>
+    <update id="update">
+        UPDATE movie SET title=#{title},rate=#{rate},releaseyear=#{releaseyear},sendtime=#{sendtime},daoyan=#{danyan},jianjie=#{jianjie} WHERE id = #{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM movie WHERE id = #{id}
+    </delete>
+</mapper>
