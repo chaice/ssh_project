@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccit.mappers.UserMapper">
+    <select id="findById" parameterType="int" resultType="com.ccit.pojo.User">
+        SELECT * FROM t_user WHERE id = #{id}
+    </select>
+    <select id="findByIf" parameterType="map" resultType="com.ccit.pojo.User">
+        SELECT * FROM t_user
+        <where>
+            <if test="username != null and username !=''">
+                username=#{username}
+            </if>
+            <if test="password != null and password !=''">
+                AND password=#{password}
+            </if>
+        </where>
+    </select>
+    <select id="findByIds" resultType="com.ccit.pojo.User">
+        SELECT * FROM t_user WHERE id IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <delete id="deleteByIds">
+        DELETE FROM t_user WHERE id in
+        <foreach collection="array" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <insert id="inserts">
+        INSERT INTO t_user(username,password) VALUES
+        <foreach collection="list" separator="," item="user">
+            (#{user.username},#{user.password})
+        </foreach>
+    </insert>
+    <select id="findUser" parameterType="int" resultType="com.ccit.pojo.User">
+        SELECT t_user.id AS id,t_user.username,t_user.avatar,t_topic.title AS topic.title,t_node.nodename AS node.nodename
+        FROM t_user
+        INNER JOIN t_topic ON t_user.id = t_topic.userid
+        INNER JOIN t_node ON t_user.id = t_node.userid
+        WHERE id=#{id}
+    </select>
+    <!--多表内链接 一对多的情况*只能使用resultMap -->
+    <select id="findResultMapById" parameterType="int" resultType="com.ccit.pojo.User" resultMap="TagMap">
+        SELECT t_user.username,t_user.avatar,t_tag.tagname FROM t_user
+        INNER JOIN t_tag on t_tag.userid = t_user.id
+        WHERE t_user.id = #{id}
+    </select>
+    <resultMap id="TagMap" type="com.ccit.pojo.User">
+        <id column="id" property="id" />
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="avatar" property="avatar"/>
+        <result column="createtime" property="createtime"/>
+        <result column="loginip" property="loginip"/>
+        <result column="logintime" property="logintime"/>
+        <result column="state" property="state"/>
+        <collection property="tagList" ofType="com.ccit.pojo.Tag">
+            <id column="id" property="id"/>
+            <result column="tagname" property="tagname"/>
+            <result column="userid" property="userid"/>
+        </collection>
+    </resultMap>
+</mapper>

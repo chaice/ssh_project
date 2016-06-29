@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccit.mappers.TopicMapper">
+    <!--多对一的情况 -->
+    <select id="findByTopicId" parameterType="int" resultType="com.ccit.pojo.Topic" resultMap="TopicResult">
+        <!--多表内链接使用resultMap-->
+        SELECT t_topic.*,t_user.username,t_user.avatar,t_node.nodename FROM t_topic
+        INNER JOIN t_node ON t_node.id = t_topic.nodeid
+        INNER JOIN t_user ON t_user.id = t_topic.userid
+        WHERE t_topic.id = #{id}
+        <!--多表内链接使用OGNL对象图导航语言 起别名 -->
+        <!--SELECT t_user.username AS 'user.username',t_user.avatar AS 'user.avatar',t_node.nodename AS 'node.nodename',t_topic.title,t_topic.createtime FROM t_topic
+        INNER JOIN t_node ON t_node.id = t_topic.nodeid
+        INNER JOIN t_user ON t_user.id = t_topic.userid
+        WHERE t_topic.id = #{id}-->
+        </select>
+    <resultMap id="TopicResult" type="com.ccit.pojo.Topic">
+        <id column="id" property="id" />
+        <result column="title" property="title"/>
+        <result column="text" property="text"/>
+        <result column="createtime" property="createtime"/>
+        <result column="userid" property="userid"/>
+        <result column="nodeid" property="nodeid"/>
+        <result column="viewnum" property="viewnum"/>
+        <result column="favnum" property="favnum"/>
+        <result column="likenum" property="likenum"/>
+        <result column="replynum" property="replynum"/>
+        <result column="replytime" property="replytime"/>
+        <association property="user" javaType="com.ccit.pojo.User" column="userid">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="avatar" property="avatar"/>
+        </association>
+        <association property="node" javaType="com.ccit.pojo.Node" column="nodeid">
+            <id column="id" property="id"/>
+            <result column="nodename" property="nodename" />
+        </association>
+    </resultMap>
+</mapper>
