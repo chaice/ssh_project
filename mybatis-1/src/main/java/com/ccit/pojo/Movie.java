@@ -1,7 +1,10 @@
 package com.ccit.pojo;
 
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable{
+    private static final long serialVersionUID = 8558534951054119595L;
     private Integer id;
     private String title;
     private Float rate;
