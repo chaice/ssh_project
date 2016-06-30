@@ -6,14 +6,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by cc on 2016/6/29.
- */
 public class TestSqlSession {
     Logger logger = LoggerFactory.getLogger(TestSqlSession.class);
+    SqlSession sqlSession = MyBatis.getSqlSession();
     @Test
     public void testSqlSession(){
-        SqlSession sqlSession = MyBatis.getSqlSession();
         logger.debug("sqlSession:{}",sqlSession);
     }
+
 }

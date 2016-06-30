@@ -4,4 +4,51 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ccit.mappers.TopicMapper">
 
+    <insert id="insert" parameterType="com.ccit.pojo.Topic">
+        INSERT INTO t_topic(title,createtime) VALUES (#{title},#{createtime})
+    </insert>
+    <insert id="inserts">
+        INSERT INTO  t_topic(title,createtime) VALUES
+        <foreach collection="list" item="topic" separator=",">
+            (#{topic.title},#{topic.createtime})
+        </foreach>
+    </insert>
+    <update id="update" parameterType="com.ccit.pojo.Topic">
+        UPDATE t_topic set title =#{title},createtime = #{createtime} where id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_topic WHERE id = #{id}
+    </delete>
+    <delete id="deleteByIds">
+        DELETE FROM t_topic WHERE id IN
+        <foreach collection="array" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="findOneById" resultType="com.ccit.pojo.Topic">
+        SELECT * FROM t_topic WHERE id=#{id}
+    </select>
+    <select id="findAll" resultType="com.ccit.pojo.Topic">
+        SELECT * FROM  t_topic
+    </select>
+    <select id="findByIds" resultType="com.ccit.pojo.Topic">
+        SELECT * FROM t_topic WHERE id IN
+        <foreach collection="array" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="findByIf" resultType="com.ccit.pojo.Topic">
+        SELECT * FROM t_topic
+        <where>
+            <if test="title != null and title != ''">
+                title=#{title}
+            </if>
+            <if test="userid != null and userid !=''">
+                and userid=#{userid}
+            </if>
+            <if test="text != null and text !=''">
+                and text=#{text}
+            </if>
+        </where>
+    </select>
 </mapper>
