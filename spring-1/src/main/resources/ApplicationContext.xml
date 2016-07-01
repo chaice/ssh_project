@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--spring的使用：使用spring的优点：降低耦合性；尽可能对代码无注入；面向接口
+ 1.添加依赖
+ 2.添加配置文件 ApplicationContext.xml ->管理器，管理各种各样的类
+ 3.在配置文件中加bean节点，将需要被spring管理的类加入进去.其中id最好为类首字母小写名，class->添加的类的完全限定名
+ 被spring管理的类默认是单例模式，即scope=singleton(这种模式下类对象在容器的初始化时被创建) 若不需要单例把scope的值改为prototype(这种模式下类对象在调用getBean()时被创建)
+ bean的延迟加载 lazy-init="true",由饿汉式(不管用不用先创建)->懒汉式(用的时候才建)
+ 4.在被注入的类中添加需要注入类的set方法 哪个类中需要注入在此类的bean中添加property,name为set方法后的名首字母小写 ref为需要注入的类的id名
+ IOC:控制翻转
+ DI:依赖注入
+ 注入的两种方式:
+ ①set注入
+ 在被注入类的bean节点中添加property节点
+ 有四种表示方法:
+ 1.<property name="在被注入类中的setXXX()方法除去set剩余的" ref="注入类的id" />
+ 2.<property name="同上">
+   <ref bean="注入类的id" />
+   </property>
+ 3.<property name="同上">
+   <bean id="" class="">  //注入类的bean !此类成为被注入类的内部类，即便有Id也不能再注入到其他类
+   </property>
+ 4.使用前提 在开头的beans中加 xmlns:p="http://www.springframework.org/schema/p"
+   <bean id="" class="" p:上面property的name-ref="注入类的id">
+   注意:当p:上面property的name="xx",这是赋值;p:上面property的name-ref="注入类的id"，这是注入
+ ②构造方法注入...构造方法注入默认的是无参的构造方法
+   在bean节点下添加constructor-arg子节点
+   1.根据参数名<constructor-arg name="构造方法中传入参数的名字" ref="传入参数的类型的id值"/>
+   2.根据参数索引(第几个参数，从零开始)<constructor-arg index="" ref="传入参数的类型的id值" />
+   3.根据构造方法参数的类型<constructor-arg type="参数的完全限定名" ref="传入参数的类型的id值" />
+     缺点:当传入多个参数且参数类型型相同，根据容器中参数的编排顺序 对应 构造方法中的参数顺序
+
+ 自动注入:autowire="";
+    有三个值：
+     1.byName:根据setXXX()方法除去set剩余的名字从容器中获取对象，并自动注入到当前类中
+     <bean id="" class="" autowire="byName" />
+     2.byType:根据setXXX()方法的参数类型从容器中寻找符合的对象，并自动注入到当前类中.当容器中有一个以上的符合，会抛出异常
+     <bean id="" class="" autowire="byType">
+     3.constructor 先根据参数的名字在容器中查找(参数名字=id即满足),根据名字找不到时再根据类型寻找
+     <bean id="" class="" autowire="constructor"/>
+
+
+  !!!AOP(Aspect Oriented Programming:面向切面编程)
+  使用aop前提导入aspect依赖,在ApplicationContext.xml中加配置
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop.xsd
+  目标对象 代理对象
+
+ 降低耦合性(依赖程度)体现?
+ -->
+<!--<bean id="user" class="com.ccit.pojo.User">-->
+    <!--<property name="userDAO" >-->
+        <!--<bean id="userDAO" class="com.ccit.dao.UserDAO" />-->
+    <!--</property>-->
+<!--</bean>-->
+    <!--<bean id="user" class="com.ccit.pojo.User" p:userDAO-ref="userDAO" p:bookName="java" />-->
+    <!--<bean class="com.ccit.pojo.User" id="user">-->
+        <!--<constructor-arg type="com.ccit.interface_dao.DAO" ref="userDAO1" />-->
+        <!--<constructor-arg type="com.ccit.interface_dao.DAO" ref="userDAO" />-->
+    <!--</bean>-->
+    <bean id="user" class="com.ccit.pojo.User" autowire="constructor"/>
+    <bean id="dao" class="com.ccit.dao.UserDAO" /><!--接口DAO的一个实现类 -->
+    <bean id="userDAO1" class="com.ccit.dao.UserDAO1" />
+    <bean id="myAspect" class="com.ccit.advice.MyAspect"/>
+    <aop:config >
+        <aop:aspect ref="myAspect">
+            <aop:pointcut expression="execution(* com.ccit.pojo..*.*(..))" id="myPoint"/>
+            <aop:before method="beforeAdvice" pointcut-ref="myPoint" />
+            <aop:after-returning method="afterReturningAdvice" pointcut-ref="myPoint" />
+            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="myPoint" />
+            <aop:after method="afterAdvice" pointcut-ref="myPoint" />
+        </aop:aspect>
+    </aop:config>
+</beans>
