@@ -73,10 +73,12 @@
     <aop:config >
         <aop:aspect ref="myAspect">
             <aop:pointcut expression="execution(* com.ccit.pojo..*.*(..))" id="myPoint"/>
-            <aop:before method="beforeAdvice" pointcut-ref="myPoint" />
-            <aop:after-returning method="afterReturningAdvice" pointcut-ref="myPoint" />
-            <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="myPoint" />
-            <aop:after method="afterAdvice" pointcut-ref="myPoint" />
+            <!--环绕通知-->
+            <aop:around method="aroundAdvice" pointcut-ref="myPoint" />
+            <!--<aop:before method="beforeAdvice" pointcut-ref="myPoint" />-->
+            <!--<aop:after-returning method="afterReturningAdvice" pointcut-ref="myPoint" />-->
+            <!--<aop:after-throwing method="afterThrowingAdvice" pointcut-ref="myPoint" />-->
+            <!--<aop:after method="afterAdvice" pointcut-ref="myPoint" />-->
         </aop:aspect>
     </aop:config>
 </beans>
