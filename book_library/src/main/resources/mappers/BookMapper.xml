@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccit.mappers.BookMapper">
+    <select id="findByBookName" resultType="Book">
+        SELECT * FROM t_book WHERE bookname = #{bookname}
+    </select>
+    <select id="findByBookId" resultType="Book">
+        SELECT * FROM t_book WHERE id = #{id}
+    </select>
+    <select id="findAll" resultType="Book">
+        SELECT t_book.*,t_booktype.id AS 'bookType.id',t_booktype.booktype AS 'bookType.booktype',
+        t_publisher.id AS 'publisher.id',t_publisher.pubname AS 'publisher.pubname'
+        FROM t_book
+        INNER JOIN t_booktype ON  t_booktype.id = t_book.typeid
+        INNER JOIN t_publisher ON  t_publisher.id = t_book.pubid
+        ORDER BY t_book.id DESC
+    </select>
+    <insert id="insert" parameterType="Book">
+        INSERT INTO t_book(bookname,bookprice,bookauthor,booknum,typeid,pubid)
+        VALUES (#{bookname},#{bookprice},#{bookauthor},#{booknum},#{typeid},#{pubid})
+    </insert>
+    <update id="update" parameterType="Book">
+        UPDATE t_book SET bookname=#{bookname},bookprice=#{bookprice},
+         bookauthor=#{bookauthor},booknum=#{booknum},typeid=#{typeid},pubid=#{pubid}
+         where id =#{id}
+    </update>
+    <delete id="deleteByBookId">
+        DELETE FROM t_book WHERE id = #{id}
+    </delete>
+</mapper>
