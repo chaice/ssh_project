@@ -9,5 +9,6 @@
     <input type="file" name="file" >
     <button>提交</button>
 </form>
+<img src="/static/img/1166305761c156e713o.jpg" alt="">
 </body>
 </html>
