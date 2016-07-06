@@ -1,7 +1,10 @@
 package com.ccit.pojo;
 
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
+    private static final long serialVersionUID = 8675379807354574723L;
     private Integer id;
     private String bookname;
     private Float bookprice;

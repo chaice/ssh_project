@@ -1,7 +1,10 @@
 package com.ccit.pojo;
 
 
-public class Publisher {
+import java.io.Serializable;
+
+public class Publisher implements Serializable {
+    private static final long serialVersionUID = 776754142247076071L;
     private Integer id;
     private String pubname;
 

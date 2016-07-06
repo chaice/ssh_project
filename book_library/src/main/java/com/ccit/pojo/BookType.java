@@ -1,6 +1,9 @@
 package com.ccit.pojo;
 
-public class BookType {
+import java.io.Serializable;
+
+public class BookType implements Serializable{
+    private static final long serialVersionUID = -8015096377911865412L;
     private Integer id;
     private String booktype;
 

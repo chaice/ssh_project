@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ccit.mappers.BookMapper">
+    <cache />
     <select id="findByBookName" resultType="Book">
         SELECT * FROM t_book WHERE bookname = #{bookname}
     </select>
@@ -17,6 +18,39 @@
         INNER JOIN t_publisher ON  t_publisher.id = t_book.pubid
         ORDER BY t_book.id DESC
     </select>
+    <select id="findByPage" resultType="Book" parameterType="map">
+       SELECT t_book.*,t_booktype.id AS 'bookType.id',t_booktype.booktype AS 'bookType.booktype',
+        t_publisher.id AS 'publisher.id',t_publisher.pubname AS 'publisher.pubname'
+        FROM t_book
+        INNER JOIN t_booktype ON  t_booktype.id = t_book.typeid
+        INNER JOIN t_publisher ON  t_publisher.id = t_book.pubid
+        <where>
+            <if test="bookname != null and bookname != ''">
+                bookname like CONCAT('%',#{bookname},'%')
+            </if>
+            <if test="typeid != null and typeid != ''">
+                and typeid = #{typeid}
+            </if>
+            <if test="pubid != null and pubid != ''">
+                and pubid = #{pubid}
+            </if>
+        </where>
+        limit ${start},${num}
+    </select>
+    <select id="findParamCount" resultType="Long" parameterType="map">
+        SELECT COUNT(*) FROM t_book
+        <where>
+            <if test="bookname != null and bookname != ''">
+                bookname like CONCAT('%',#{bookname},'%')
+            </if>
+            <if test="typeid != null and typeid != ''">
+                and typeid = #{typeid}
+            </if>
+            <if test="pubid != null and pubid != ''">
+                and pubid = #{pubid}
+            </if>
+        </where>
+    </select>
     <insert id="insert" parameterType="Book">
         INSERT INTO t_book(bookname,bookprice,bookauthor,booknum,typeid,pubid)
         VALUES (#{bookname},#{bookprice},#{bookauthor},#{booknum},#{typeid},#{pubid})
@@ -29,4 +63,5 @@
     <delete id="deleteByBookId">
         DELETE FROM t_book WHERE id = #{id}
     </delete>
+
 </mapper>

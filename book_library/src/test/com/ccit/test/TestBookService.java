@@ -2,18 +2,25 @@ package com.ccit.test;
 
 import com.ccit.pojo.Book;
 import com.ccit.service.BookService;
+import com.ccit.utils.Page;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 public class TestBookService {
+    Logger logger = LoggerFactory.getLogger(TestBookService.class);
     @Inject
     private BookService bookService;
     @Test
@@ -51,5 +58,17 @@ public class TestBookService {
     @Test
     public void testDeleteByBookId(){
         bookService.deleteByBookId(1);
+    }
+    @Test
+    public void testFindByPage(){
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("bookname","第");
+        map.put("typeid",2);
+        Page<Book> page = bookService.findByPage(1,map);
+        logger.debug("page:{}",page.getPage());
+       List<Book> bookList = page.getItems();
+        for (Book book:bookList) {
+            logger.debug("book:{}",book);
+        }
     }
 }
