@@ -115,7 +115,7 @@
                 prev:'上一页',
                 next:'下一页',
                 last:'末页',
-                href:'?bookname=${bookname}&type=${typeid}&pub=${pubid}&p={{number}}'
+                href:'?bookname='+encodeURIComponent(${bookname})+'&type=${typeid}&pub=${pubid}&p={{number}}'
             });
             $("button.btn-danger").click(function(){
                 var id = this.getAttribute("rel");

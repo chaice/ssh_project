@@ -3,6 +3,7 @@ package com.ccit.controller;
 import com.ccit.pojo.Book;
 import com.ccit.service.BookService;
 import com.ccit.utils.Page;
+import com.ccit.utils.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,7 @@ public class BooksController {
                            @RequestParam(value = "bookname",required = false)String bookname,
                            @RequestParam(value = "type",required = false)Integer typeid,
                            @RequestParam(value = "pub",required = false)Integer pubid){
+        bookname = Strings.toUTF8(bookname);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("bookname",bookname);
         map.put("typeid",typeid);
