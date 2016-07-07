@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccit.mappers.BookMapper">
+    <insert id="add">
+        INSERT INTO t_book(bookname,bookprice,bookauthor,booknum,typeid,pubid) VALUES (#{bookname},
+        #{bookprice},#{bookauthor},#{booknum},#{typeid},#{pubid})
+    </insert>
+    <update id="alterById">
+        UPDATE t_book SET bookname=#{bookname},bookprice=#{bookprice},bookauthor=#{bookauthor},
+        booknum=#{booknum},typeid=#{typeid},pubid=#{pubid} where id=#{id}
+    </update>
+    <delete id="deleteById">
+        DELETE FROM t_book WHERE id=#{id}
+    </delete>
+    <select id="findByParam" resultType="Book" parameterType="map">
+        SELECT t_book.*,t_publisher.id AS 'publisher.id',t_publisher.pubname AS 'publisher.pubname',
+        t_booktype.id AS 'booktype.id',t_booktype.booktype AS 'booktype.booktype'
+        FROM t_book
+        INNER JOIN t_booktype ON t_booktype.id = t_book.typeid
+        INNER JOIN t_publisher ON t_publisher.id = t_book.pubid
+        <where>
+            <if test="bookname != null and bookname != ''">
+                bookname LIKE concat('%',#{bookname},'%')
+            </if>
+            <if test="typeid != null and typeid != ''">
+                and typeid = #{typeid}
+            </if>
+            <if test="pubid != null and pubid !='' ">
+                and pubid = #{pubid}
+            </if>
+        </where>
+        <if test="dir != null and dir !=''">
+            ORDER BY ${columnName} ${dir}
+        </if>
+        limit ${start},${size}
+    </select>
+    <select id="count" resultType="Long">
+        SELECT COUNT(*) FROM t_book
+    </select>
+    <select id="countByParam" resultType="Long" parameterType="map">
+        SELECT count(*) FROM t_book
+        <where>
+            <if test="bookname != null and bookname != ''">
+                bookname LIKE concat('%',#{bookname},'%')
+            </if>
+            <if test="typeid != null and typeid != ''">
+                and typeid = #{typeid}
+            </if>
+            <if test="pubid != null and pubid !='' ">
+                and pubid = #{pubid}
+            </if>
+        </where>
+    </select>
+    <select id="findById" resultType="Book">
+        SELECT t_book.*,t_publisher.id AS 'publisher.id',t_publisher.pubname AS 'publisher.pubname',
+        t_booktype.id AS 'booktype.id',t_booktype.booktype AS 'booktype.booktype'
+        FROM t_book
+        INNER JOIN t_booktype ON t_booktype.id = t_book.typeid
+        INNER JOIN t_publisher ON t_publisher.id = t_book.pubid
+        WHERE t_book.id = #{id}
+    </select>
+</mapper>
