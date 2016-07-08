@@ -18,7 +18,7 @@
     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="com.ccit.pojo"/>
-        <!--<property name="mapperLocations" value="classpath:mappers/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
     </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ccit.mappers"/>

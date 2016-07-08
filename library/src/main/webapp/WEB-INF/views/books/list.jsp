@@ -198,7 +198,7 @@
                     dataSource.type = $("#type").val();
                     dataSource.pub = $("#pub").val();
                 }},
-            "search": "Fred",
+          "searching":false,
             "lengthMenu":[5,10,15,20],
             "order": [0,'desc'],
             "columnDefs": [ {

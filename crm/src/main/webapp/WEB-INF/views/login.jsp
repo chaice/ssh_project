@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -15,20 +16,26 @@
     </style>
 
 </head>
-<body class="hold-transition login-page" style="background-image: url('http://www.bz55.com/uploads/allimg/120724/1-120H4100302.jpg');background-size: 100% 100%">
+<body class="hold-transition login-page" style="background-image: url('/static/dist/img/7730-1411031GZ8.jpg');background-size: 100% 100%">
 <div class="login-box">
     <div class="login-logo">
         <a href="#"><b>CCit</b>CRM</a>
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">用户登录</p>
-        <form action="#" method="post">
+        <c:if test="${not empty message}">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <p>${message}</p>
+            </div>
+        </c:if>
+        <form action="/" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="请输入用户名！">
+                <input type="text" class="form-control" placeholder="请输入用户名！"name="username">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="请输入密码！">
+                <input type="password" class="form-control" placeholder="请输入密码！" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
