@@ -21,7 +21,6 @@ public class TestUserMapper {
     @Test
     public void testFind(){
         User user = userService.findUser("admin");
-        logger.debug("user:{}",user);
+        logger.debug("user:{},time:{}",user);
     }
-
 }

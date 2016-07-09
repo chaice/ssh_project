@@ -1,12 +1,23 @@
 package com.ccit.pojo;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class UserLog {
+public class UserLog implements Serializable{
+    private static final long serialVersionUID = -8082427306247412048L;
     private Integer id;
     private Integer userid;
-    private Timestamp logintime;
+    private String logintime;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     public Integer getId() {
         return id;
@@ -24,11 +35,21 @@ public class UserLog {
         this.userid = userid;
     }
 
-    public Timestamp getLogintime() {
+    public String  getLogintime() {
         return logintime;
     }
 
-    public void setLogintime(Timestamp logintime) {
+    public void setLogintime(String  logintime) {
         this.logintime = logintime;
+    }
+
+    @Override
+    public String toString() {
+        return "UserLog{" +
+                "id=" + id +
+                ", userid=" + userid +
+                ", logintime=" + logintime +
+                ", ip='" + ip + '\'' +
+                '}';
     }
 }

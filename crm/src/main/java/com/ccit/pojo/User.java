@@ -8,7 +8,7 @@ public class User {
     private String username;
     private String password;
     private String name;
-    private Timestamp timestamp;
+    private Timestamp creattime;
     private Boolean enable;
     private Integer roleid;
 
@@ -45,11 +45,11 @@ public class User {
     }
 
     public Timestamp getTimestamp() {
-        return timestamp;
+        return creattime;
     }
 
     public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+        this.creattime = timestamp;
     }
 
     public Boolean getEnable() {
@@ -75,7 +75,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", timestamp=" + timestamp +
+                ", timestamp=" + creattime +
                 ", enable=" + enable +
                 ", roleid=" + roleid +
                 '}';

@@ -19,10 +19,10 @@
 <body class="hold-transition login-page" style="background-image: url('/static/dist/img/7730-1411031GZ8.jpg');background-size: 100% 100%">
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>CCit</b>CRM</a>
+        <i style="color: #d0e9c6"><b>CCit</b>CRM</i>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">用户登录</p>
+        <h3><p class="login-box-msg">用户登录</p></h3>
         <c:if test="${not empty message}">
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>

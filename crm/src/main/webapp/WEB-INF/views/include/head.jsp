@@ -98,7 +98,7 @@
                         <!-- The user image in the navbar-->
                         <img src="/static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs"><shiro:principal property="username"></shiro:principal></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
@@ -106,11 +106,11 @@
                             <img src="/static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                cc - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                <shiro:principal property="username"></shiro:principal>- Web Developer
+                                <small><shiro:principal property="timestamp"></shiro:principal>
+                                    Member since Nov. 2012</small>
                             </p>
                         </li>
-                        <!-- Menu Body -->
                         <li class="user-body">
                             <div class="row">
                                 <div class="col-xs-4 text-center">
@@ -125,12 +125,16 @@
                             </div>
                         </li>
                         <!-- Menu Footer-->
-                        <li class="user-footer">
+                        <li class="user-footer" style="padding-right: 0px">
                             <div class="pull-left">
                                 <a href="javascript:;" class="btn btn-default btn-flat" id="alter">修改密码</a>
                             </div>
-                            <div class="pull-right">
-                                <a href="javascript:;" class="btn btn-default btn-flat">安全退出</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <div class="pull-left">
+                                <a href="javascript:;" class="btn btn-default btn-flat" style="margin:0px 5px" id="log">查看日志</a>
+                            </div>
+                            <div class="pull-left">
+                                <a href="javascript:;" class="btn btn-default btn-flat" id="exit">安全退出</a>
                             </div>
                         </li>
                     </ul>
