@@ -31,4 +31,7 @@
         INNER JOIN t_role ON t_role.id = t_user.roleid
         WHERE t_user.id = #{id}
     </select>
+    <update id="alterUser" parameterType="User">
+        UPDATE t_user SET username=#{username},name=#{name},roleid=#{roleid} WHERE id=#{id}
+    </update>
 </mapper>

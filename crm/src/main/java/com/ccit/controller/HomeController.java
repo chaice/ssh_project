@@ -152,5 +152,14 @@ public class HomeController {
         User user = userService.findById(id);
         return user;
     }
+    @ResponseBody
+    @RequestMapping(value = "/alter",method = RequestMethod.POST)
+    public String alterUser(User user){
+        logger.debug("user:{}",user);
+        if(userService.alterUser(user)) {
+            return "success";
+        }
+        return "";
+    }
 }
 

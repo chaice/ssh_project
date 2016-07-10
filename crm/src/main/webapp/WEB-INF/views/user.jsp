@@ -122,11 +122,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增员工</h4>
+                            <h4 class="modal-title">修改员工</h4>
                         </div>
                         <div class="box box-info">
                             <form class="form-horizontal" id="alter">
                                 <div class="box-body">
+                                    <input type="hidden" name="id" id="id">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">员工</label>
                                         <div class="col-sm-10">
@@ -255,13 +256,37 @@
            })
            var id = $(this).attr("rel");
            $.get("/alter/"+id).done(function(data){
+               $("#id").val(data.id);
                $("#username").val(data.username);
                $("#name").val(data.name);
                $("#roleid").val(data.roleid);
            }).fail(function(){
                alert("操作失败!")
            })
-       })
+       });
+       $("#saveAlter").click(function(){
+           $("#alter").submit();
+       });
+        $("#alter").validate({
+            errorElement:"span",
+            errorClass:"text-danger",
+            rules:{"username":{required:"true"},
+            "name":{required:"true"},"roleid":{required:"true"}},
+            messages:{"username":{required:"请输入员工!"},
+                "name":{required:"请输入真实姓名!"},"roleid":{required:"请选择角色!"}},
+            submitHandler:function(form){
+                $.post("/alter",$(form).serialize()).done(function(data){
+                    if(data == "success"){
+                        $("#alterUser").modal("hide");
+                        dataTable.ajax.reload;
+                    }else{
+                        alert("操作失败!")
+                    }
+                }).fail(function(){
+                    alert("操作失败!")
+                })
+            }
+        })
     })
 </script>
 </body>

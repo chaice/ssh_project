@@ -56,4 +56,10 @@ public class UserService {
     public User findById(Integer id){
         return userMapper.findById(id);
     }
+    public boolean alterUser(User user){
+        if(userMapper.alterUser(user) == 1){
+            return true;
+        }
+        return false;
+    }
 }

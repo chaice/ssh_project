@@ -4,11 +4,7 @@
     <list default="true" id="0369401c-c068-489a-9958-913d06c3dffe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ccit/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/ccit/controller/HomeController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ccit/mappers/UserMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/ccit/mappers/UserMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ccit/pojo/Role.java" afterPath="$PROJECT_DIR$/src/main/java/com/ccit/pojo/Role.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ccit/pojo/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/ccit/pojo/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ccit/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/ccit/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mappers/RoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mappers/RoleMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserLogMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserLogMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user.jsp" />
     </list>
@@ -51,30 +47,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="user.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0606618">
-              <caret line="249" column="61" selection-start-line="249" selection-start-column="61" selection-end-line="249" selection-end-column="61" />
+            <state vertical-scroll-proportion="5.903226">
+              <caret line="127" column="64" selection-start-line="127" selection-start-column="64" selection-end-line="127" selection-end-column="64" />
               <folding>
-                <element signature="n#div#1;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="e#9558#10711#0#HTML" expanded="false" />
-                <element signature="e#10974#11018#0#HTML" expanded="false" />
-                <element signature="e#11050#11913#0#HTML" expanded="false" />
-                <element signature="e#11976#12321#0#HTML" expanded="false" />
-                <element signature="e#12385#12848#0#HTML" expanded="false" />
+                <element signature="e#9634#10787#0#HTML" expanded="false" />
+                <element signature="e#10822#11013#0#HTML" expanded="false" />
+                <element signature="e#11050#11094#0#HTML" expanded="false" />
+                <element signature="e#12052#12397#0#HTML" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ccit/controller/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="152" column="20" selection-start-line="152" selection-start-column="20" selection-end-line="152" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.5777778">
+              <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#login#0;class#HomeController#0" expanded="false" />
@@ -85,6 +77,7 @@
                 <element signature="method#getUserData#0;class#HomeController#0" expanded="false" />
                 <element signature="method#addUser#0;class#HomeController#0" expanded="false" />
                 <element signature="method#deleteUser#0;class#HomeController#0" expanded="false" />
+                <element signature="e#5539#5552#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -94,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ccit/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
               <folding>
                 <element signature="method#alterPw#0;class#UserService#0" expanded="false" />
                 <element signature="method#addLog#0;class#UserService#0" expanded="false" />
@@ -109,7 +102,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ccit/mappers/UserMapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+              <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,16 +113,18 @@
       <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.290322">
-              <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+            <state vertical-scroll-proportion="-4.903226">
+              <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
               <folding>
-                <marker date="1468166352351" expanded="true" signature="260:359" placeholder="INSERT INTO t_user... " />
-                <marker date="1468166352351" expanded="true" signature="408:461" placeholder="UPDATE t_use... " />
-                <marker date="1468166352351" expanded="true" signature="513:546" placeholder="DELETE FROM " />
-                <marker date="1468166352351" expanded="true" signature="620:667" placeholder="SELECT * FRO... t_user" />
-                <marker date="1468166352351" expanded="true" signature="758:937" placeholder="SELECT t_use... t_user" />
-                <marker date="1468166352351" expanded="true" signature="1005:1032" placeholder="SELECT COUNT... t_user" />
-                <marker date="1468166352351" expanded="true" signature="1100:1280" placeholder="SELECT t_use... t_user" />
+                <marker date="1468191934109" expanded="true" signature="260:359" placeholder="INSERT INTO t_user... " />
+                <marker date="1468191934109" expanded="true" signature="408:461" placeholder="UPDATE t_use... " />
+                <marker date="1468191934109" expanded="true" signature="513:546" placeholder="DELETE FROM " />
+                <marker date="1468191934109" expanded="true" signature="620:667" placeholder="SELECT * FRO... t_user" />
+                <marker date="1468191934109" expanded="true" signature="758:937" placeholder="SELECT t_use... t_user" />
+                <marker date="1468191934109" expanded="true" signature="1005:1032" placeholder="SELECT COUNT... t_user" />
+                <marker date="1468191934109" expanded="true" signature="1100:1280" placeholder="SELECT t_use... t_user" />
+                <marker date="1468191934109" expanded="true" signature="1352:1397" placeholder="UPDATE t_use... " />
+                <marker date="1468191934109" expanded="true" signature="1352:1435" placeholder="UPDATE t_use... " />
               </folding>
             </state>
           </provider>
@@ -197,9 +192,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/mappers/UserLogMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/ccit/pojo/Role.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ccit/pojo/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/ccit/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ccit/mappers/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ccit/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ccit/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user.jsp" />
       </list>
@@ -254,6 +249,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -606,9 +604,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1214,6 +1209,7 @@
       <workItem from="1468145181531" duration="12467000" />
       <workItem from="1468160706749" duration="505000" />
       <workItem from="1468161584900" duration="5569000" />
+      <workItem from="1468190684734" duration="2679000" />
     </task>
     <servers />
   </component>
@@ -1250,7 +1246,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82986000" />
+    <option name="totallyTimeSpent" value="85665000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="0" width="1370" height="737" extended-state="0" />
@@ -1263,12 +1259,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5" sideWeight="0.5030534" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30960265" sideWeight="0.49694657" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5049669" sideWeight="0.49694657" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24961832" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0030534351" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0030534351" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1526,7 +1522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2925532">
           <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1573,10 +1568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding>
-            <element signature="e#289#290#0" expanded="true" />
-            <element signature="e#332#333#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1607,10 +1598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16508539">
           <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding>
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#275#276#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1628,10 +1615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.085389">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#805#806#0" expanded="true" />
-            <element signature="e#847#848#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1644,7 +1627,6 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1665,32 +1647,33 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.903226">
+          <caret line="33" column="47" selection-start-line="33" selection-start-column="47" selection-end-line="33" selection-end-column="47" />
+          <folding>
+            <marker date="1468191934109" expanded="true" signature="260:359" placeholder="INSERT INTO t_user... " />
+            <marker date="1468191934109" expanded="true" signature="408:461" placeholder="UPDATE t_use... " />
+            <marker date="1468191934109" expanded="true" signature="513:546" placeholder="DELETE FROM " />
+            <marker date="1468191934109" expanded="true" signature="620:667" placeholder="SELECT * FRO... t_user" />
+            <marker date="1468191934109" expanded="true" signature="758:937" placeholder="SELECT t_use... t_user" />
+            <marker date="1468191934109" expanded="true" signature="1005:1032" placeholder="SELECT COUNT... t_user" />
+            <marker date="1468191934109" expanded="true" signature="1100:1280" placeholder="SELECT t_use... t_user" />
+            <marker date="1468191934109" expanded="true" signature="1352:1397" placeholder="UPDATE t_use... " />
+            <marker date="1468191934109" expanded="true" signature="1352:1435" placeholder="UPDATE t_use... " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ccit/mappers/UserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.290322">
-          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
-          <folding>
-            <marker date="1468166352351" expanded="true" signature="260:359" placeholder="INSERT INTO t_user... " />
-            <marker date="1468166352351" expanded="true" signature="408:461" placeholder="UPDATE t_use... " />
-            <marker date="1468166352351" expanded="true" signature="513:546" placeholder="DELETE FROM " />
-            <marker date="1468166352351" expanded="true" signature="620:667" placeholder="SELECT * FRO... t_user" />
-            <marker date="1468166352351" expanded="true" signature="758:937" placeholder="SELECT t_use... t_user" />
-            <marker date="1468166352351" expanded="true" signature="1005:1032" placeholder="SELECT COUNT... t_user" />
-            <marker date="1468166352351" expanded="true" signature="1100:1280" placeholder="SELECT t_use... t_user" />
           </folding>
         </state>
       </provider>
@@ -1698,7 +1681,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ccit/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
           <folding>
             <element signature="method#alterPw#0;class#UserService#0" expanded="false" />
             <element signature="method#addLog#0;class#UserService#0" expanded="false" />
@@ -1708,10 +1691,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.903226">
+          <caret line="127" column="64" selection-start-line="127" selection-start-column="64" selection-end-line="127" selection-end-column="64" />
+          <folding>
+            <element signature="e#9634#10787#0#HTML" expanded="false" />
+            <element signature="e#10822#11013#0#HTML" expanded="false" />
+            <element signature="e#11050#11094#0#HTML" expanded="false" />
+            <element signature="e#12052#12397#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ccit/controller/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="152" column="20" selection-start-line="152" selection-start-column="20" selection-end-line="152" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.5777778">
+          <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#login#0;class#HomeController#0" expanded="false" />
@@ -1722,23 +1718,7 @@
             <element signature="method#getUserData#0;class#HomeController#0" expanded="false" />
             <element signature="method#addUser#0;class#HomeController#0" expanded="false" />
             <element signature="method#deleteUser#0;class#HomeController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0606618">
-          <caret line="249" column="61" selection-start-line="249" selection-start-column="61" selection-end-line="249" selection-end-column="61" />
-          <folding>
-            <element signature="n#div#1;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="e#9558#10711#0#HTML" expanded="false" />
-            <element signature="e#10974#11018#0#HTML" expanded="false" />
-            <element signature="e#11050#11913#0#HTML" expanded="false" />
-            <element signature="e#11976#12321#0#HTML" expanded="false" />
-            <element signature="e#12385#12848#0#HTML" expanded="false" />
+            <element signature="e#5539#5552#0" expanded="false" />
           </folding>
         </state>
       </provider>
