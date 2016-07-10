@@ -107,7 +107,7 @@
 
                             <p>
                                 <shiro:principal property="username"></shiro:principal>- Web Developer
-                                <small><shiro:principal property="timestamp"></shiro:principal>
+                                <small><shiro:principal property="creattime"></shiro:principal>
                                     Member since Nov. 2012</small>
                             </p>
                         </li>

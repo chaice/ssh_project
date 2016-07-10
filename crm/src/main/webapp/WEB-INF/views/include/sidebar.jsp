@@ -20,7 +20,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/user">员工管理</a></li>
+                    <li><a href="/user" id="userManager">员工管理</a></li>
                     <li><a href="#">系统设置</a></li>
                 </ul>
             </li>

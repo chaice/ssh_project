@@ -3,6 +3,7 @@ package com.ccit.test;
 import com.ccit.mappers.UserMapper;
 import com.ccit.pojo.User;
 import com.ccit.service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -22,5 +23,10 @@ public class TestUserMapper {
     public void testFind(){
         User user = userService.findUser("admin");
         logger.debug("user:{},time:{}",user);
+    }
+    @Test
+    public void testMD5(){
+      String password = DigestUtils.md5Hex("654321");
+        logger.debug("md5:{}",password);
     }
 }

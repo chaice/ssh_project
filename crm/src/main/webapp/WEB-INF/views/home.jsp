@@ -161,7 +161,7 @@
        $("#exit").click(function(){
           location.href = "/exit";
        });
-        $("#log").click(function(){
+       $("#log").click(function(){
                 $("#UserLog").css("visibility","visible");
                 $("#example1").DataTable({
                     "serverSide":true,
@@ -190,10 +190,9 @@
                     }
                 })
         });
-        $("#log1").click(function(){
+       $("#log1").click(function(){
             $("#UserLog").css("visibility","hidden");
         });
-
     });
 </script>
 </body>

@@ -1,6 +1,7 @@
 package com.ccit.controller;
 
 import com.ccit.pojo.LogTable;
+import com.ccit.pojo.Role;
 import com.ccit.pojo.User;
 import com.ccit.pojo.UserLog;
 import com.ccit.service.UserLogService;
@@ -8,6 +9,7 @@ import com.ccit.service.UserService;
 import com.ccit.utils.LoginIp;
 import com.ccit.utils.ShiroUtil;
 import com.google.common.collect.Maps;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -16,10 +18,8 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
@@ -52,7 +52,7 @@ public class HomeController {
             subject.logout();
         }
         try {
-            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password));
             String ip = LoginIp.getIp(request);
             subject.login(token);
            if( userService.addLog(ip)){
@@ -73,7 +73,7 @@ public class HomeController {
     @RequestMapping(value = "/form",method =RequestMethod.GET )
     public String testPW(@RequestParam("origin")String password){
         User user = ShiroUtil.getPrincipal();
-        if(user.getPassword().equals(password)){
+        if(user.getPassword().equals(DigestUtils.md5Hex(password))){
             return "true";
         }else{
             return "false";
@@ -82,7 +82,7 @@ public class HomeController {
     @ResponseBody
     @RequestMapping(value = "/form",method = RequestMethod.POST)
     public String alterPw(@RequestParam("new")String password){
-        userService.alterPw(password);
+        userService.alterPw(DigestUtils.md5Hex(password));
         return "success";
     }
     @RequestMapping(value = "/exit",method = RequestMethod.GET)
@@ -106,8 +106,37 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/user",method = RequestMethod.GET)
-    public String userManage(){
-        return "setting/user";
+    public String userManage(Model model){
+        List<Role> roleList = userService.findAllRole();
+        model.addAttribute("roleList",roleList);
+        return "user";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/user/data.json",method = RequestMethod.GET)
+    public LogTable<User> getUserData(HttpServletRequest request){
+        String draw = request.getParameter("draw");
+        String start = request.getParameter("start");
+        String size = request.getParameter("length");
+
+        Map<String,Object>map = Maps.newHashMap();
+        map.put("start",start);
+        map.put("size",size);
+        List<User> data = userService.finByParam(map);
+        Long recordsTotal = userService.getTotal() ;
+        Long recordsFiltered = userService.getTotal();
+        LogTable<User> userTable = new LogTable<User>(draw,recordsTotal,recordsFiltered,data);
+        return userTable;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addUser",method = RequestMethod.POST)
+    public String addUser(User user,RedirectAttributes attributes){
+        logger.debug("user:{}",user);
+        String password = DigestUtils.md5Hex(user.getPassword());
+        user.setPassword(password);
+        userService.addUser(user);
+        attributes.addFlashAttribute("message","新增成功!");
+        return "success";
     }
 }
 

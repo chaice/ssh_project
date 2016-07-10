@@ -12,6 +12,8 @@ public class User {
     private Boolean enable;
     private Integer roleid;
 
+    private Role role;
+
     public Integer getId() {
         return id;
     }
@@ -44,12 +46,12 @@ public class User {
         this.name = name;
     }
 
-    public Timestamp getTimestamp() {
+    public Timestamp getCreattime() {
         return creattime;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.creattime = timestamp;
+    public void setCreattime(Timestamp creattime) {
+        this.creattime = creattime;
     }
 
     public Boolean getEnable() {
@@ -66,6 +68,14 @@ public class User {
 
     public void setRoleid(Integer roleid) {
         this.roleid = roleid;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
