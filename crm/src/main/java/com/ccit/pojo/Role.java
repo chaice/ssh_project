@@ -1,7 +1,10 @@
 package com.ccit.pojo;
 
 
-public class Role {
+import java.io.Serializable;
+
+public class Role implements Serializable {
+    private static final long serialVersionUID = 265774450066941056L;
     private Integer id;
     private String rolename;
 

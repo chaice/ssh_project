@@ -12,4 +12,6 @@ public interface UserMapper {
     List<User> findByParam(Map<String,Object>param);
     Long getTotal();
     void addUser(User user);
+    void deleteById(Integer id);
+    User findById(Integer id);
 }

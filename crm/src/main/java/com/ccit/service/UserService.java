@@ -24,35 +24,36 @@ public class UserService {
     public User findUser(String username){
         return userMapper.findByUserName(username);
     }
-
     public void alterPw(String password) {
         User user = ShiroUtil.getPrincipal();
         user.setPassword(password);
         userMapper.alterPw(user);
     }
-
     public boolean addLog(String ip) {
         User user = ShiroUtil.getPrincipal();
-        String logintime = DateTime.now().toString("yyyy-MM-hh ss:mm:ss");
+        String logintime = DateTime.now().toString("yyyy-MM-dd HH:mm:ss");
         int i = logMapper.insert(user.getId(),ip,logintime);
         if(i == 1){
             return true;
         }
         return false;
     }
-
     public List<User> finByParam(Map<String,Object>param){
         return userMapper.findByParam(param);
     }
     public Long getTotal(){
         return userMapper.getTotal();
     }
-
     public List<Role> findAllRole(){
         return roleMapper.findAllRole();
     }
-
     public void addUser(User user){
         userMapper.addUser(user);
+    }
+    public void deleteById(Integer id){
+        userMapper.deleteById(id);
+    }
+    public User findById(Integer id){
+        return userMapper.findById(id);
     }
 }

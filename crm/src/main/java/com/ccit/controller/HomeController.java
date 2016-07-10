@@ -138,5 +138,19 @@ public class HomeController {
         attributes.addFlashAttribute("message","新增成功!");
         return "success";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    public String deleteUser(@PathVariable("id")Integer id){
+        userService.deleteById(id);
+        return "success";
+    }
+
+    @ResponseBody
+    @RequestMapping(value ="alter/{id}",method = RequestMethod.GET)
+    public User alterUser(@PathVariable("id")Integer id){
+        User user = userService.findById(id);
+        return user;
+    }
 }
 

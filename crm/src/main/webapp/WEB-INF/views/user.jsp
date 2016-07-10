@@ -26,7 +26,8 @@
                     ${message}
                 </div>
             </c:if>
-                <div class="well well-sm">
+            <!--搜索-->
+            <div class="well well-sm">
                     <a type="button" class="btn btn-success pull-right" href="javascript:;" id="add">新增员工</a>
                     <form class="form-inline" method="get">
                         <div class="form-group">
@@ -43,6 +44,7 @@
                         <button type="button" class="btn btn-default" id="searchButton">搜索</button>
                     </form>
                 </div>
+            <!--员工列表-->
             <div class="box" id="UserLog">
                 <div class="box-header">
                     <h1 class="box-title">员工列表</h1>
@@ -65,6 +67,7 @@
                     </div>
                 </div>
             </div>
+            <!--增加新员工-->
             <div class="modal fade" id="addUser">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -109,6 +112,49 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button type="button" class="btn btn-primary" id="save">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--修改员工-->
+            <div class="modal fade" id="alterUser">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">新增员工</h4>
+                        </div>
+                        <div class="box box-info">
+                            <form class="form-horizontal" id="alter">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">员工</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control"type="text" name="username" id="username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">真实姓名</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="name" id="name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">角色</label>
+                                        <div class="col-sm-6">
+                                            <select name="roleid" class="form-control" id="roleid">
+                                                <c:forEach items="${roleList}" var="role">
+                                                    <option value="${role.id}" ${roleid == role.id?'selected':''}>${role.rolename}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="saveAlter">保存</button>
                         </div>
                     </div>
                 </div>
@@ -189,7 +235,33 @@
                })
            }
        });
-        
+       $(document).delegate(".btn-danger","click",function(){
+           var id = $(this).attr("rel");
+          if(confirm("确认要删除吗?")){
+              $.get("/delete/"+id).done(function(data){
+                  if(data == "success"){
+                      dataTable.ajax.reload();
+                  }
+              }).fail(function(){
+                  alert("删除失败!")
+              })
+          }
+       });
+       $(document).delegate(".btn-warning","click",function(){
+           $("#alterUser").modal({
+               "show":"true",
+               "backdrop":"static",
+               "keyboard":false
+           })
+           var id = $(this).attr("rel");
+           $.get("/alter/"+id).done(function(data){
+               $("#username").val(data.username);
+               $("#name").val(data.name);
+               $("#roleid").val(data.roleid);
+           }).fail(function(){
+               alert("操作失败!")
+           })
+       })
     })
 </script>
 </body>
