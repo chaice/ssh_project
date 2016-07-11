@@ -62,4 +62,10 @@ public class UserService {
         }
         return false;
     }
+    public User findByUserName(String username){
+        return userMapper.findByUserName(username);
+    }
+    public Long findByParamCount(Map<String,Object>param){
+        return userMapper.findByParamCount(param);
+    }
 }

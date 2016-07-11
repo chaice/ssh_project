@@ -13,6 +13,7 @@ public class User implements Serializable {
     private Timestamp creattime;
     private Boolean enable;
     private Integer roleid;
+    private String weixin;
 
     private Role role;
 
@@ -78,6 +79,14 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getWeixin() {
+        return weixin;
+    }
+
+    public void setWeixin(String weixin) {
+        this.weixin = weixin;
     }
 
     @Override

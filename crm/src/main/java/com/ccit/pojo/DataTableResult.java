@@ -2,13 +2,13 @@ package com.ccit.pojo;
 
 import java.util.List;
 
-public class LogTable<T> {
+public class DataTableResult<T> {
     private String draw;
     private Long recordsTotal;
     private Long recordsFiltered;
     private List<T> data;
 
-    public LogTable(String draw, Long recordsTotal, Long recordsFiltered, List<T> data) {
+    public DataTableResult(String draw, Long recordsTotal, Long recordsFiltered, List<T> data) {
         this.draw = draw;
         this.recordsTotal = recordsTotal;
         this.recordsFiltered = recordsFiltered;

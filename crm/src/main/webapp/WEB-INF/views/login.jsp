@@ -8,8 +8,8 @@
     <title>登录</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/plugins/iCheck/square/blue.css">
     <style>
@@ -24,14 +24,24 @@
     <div class="login-box-body">
         <h3><p class="login-box-msg">用户登录</p></h3>
         <c:if test="${not empty message}">
-            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <p>${message}</p>
+            <c:choose>
+                <c:when test="${message.state =='success'}">
+                    <div class="alert alert-success alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <p>${message.message}</p>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <p>${message.message}</p>
             </div>
+             </c:otherwise>
+            </c:choose>
         </c:if>
         <form action="/" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="请输入用户名！"name="username">
+                <input type="text" class="form-control" placeholder="请输入用户名！"name="username" autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

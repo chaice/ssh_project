@@ -127,14 +127,14 @@
                         <!-- Menu Footer-->
                         <li class="user-footer" style="padding-right: 0px">
                             <div class="pull-left">
-                                <a href="javascript:;" class="btn btn-default btn-flat" id="alter">修改密码</a>
+                                <a href="/alterPassword" class="btn btn-default btn-flat">修改密码</a>
                             </div>
                             &nbsp;&nbsp;&nbsp;
                             <div class="pull-left">
-                                <a href="javascript:;" class="btn btn-default btn-flat" style="margin:0px 5px" id="log">查看日志</a>
+                                <a href="/lookLog" class="btn btn-default btn-flat" style="margin:0px 5px">查看日志</a>
                             </div>
                             <div class="pull-left">
-                                <a href="javascript:;" class="btn btn-default btn-flat" id="exit">安全退出</a>
+                                <a href="/exit" class="btn btn-default btn-flat">安全退出</a>
                             </div>
                         </li>
                     </ul>

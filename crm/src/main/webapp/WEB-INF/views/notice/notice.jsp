@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>主页</title>
+    <title>公告</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -15,9 +15,9 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    <%@include file="include/head.jsp"%>
-    <jsp:include page="include/sidebar.jsp">
-        <jsp:param name="menu" value="home"/>
+    <%@include file="../include/head.jsp"%>
+    <jsp:include page="../include/sidebar.jsp">
+        <jsp:param name="menu" value="notice"/>
     </jsp:include>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -25,10 +25,13 @@
             <h1>
                 这是一个项目的开始
                 <small>关注它!</small>
+                <shiro:hasRole name="经理">
+                <a type="button" class="btn btn-success pull-right" href="notice/new"><i class="fa fa-plus"></i> 新增公告</a>
+                </shiro:hasRole>
             </h1>
         </section>
         <!-- Main content nei rong  -->
-        <section class="content" id="content">
+        <section class="content">
         </section>
     </div>
 </div>
@@ -37,4 +40,3 @@
 <script src="/static/dist/js/app.min.js"></script>
 </body>
 </html>
-

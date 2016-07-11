@@ -5,7 +5,7 @@
 <mapper namespace="com.ccit.mappers.UserMapper">
     <cache/>
     <insert id="addUser">
-        INSERT INTO t_user(username,password,name,roleid) VALUES(#{username},#{password},#{name},#{roleid})
+        INSERT INTO t_user(username,password,name,roleid,weixin) VALUES(#{username},#{password},#{name},#{roleid},#{weixin})
     </insert>
     <update id="alterPw">
         UPDATE t_user SET password=#{password} where id=#{id}
@@ -20,10 +20,31 @@
         SELECT t_user.*,t_role.id AS 'role.id',t_role.rolename AS 'role.rolename' FROM
         t_user
         INNER JOIN t_role ON t_role.id = t_user.roleid
+        <where>
+            <if test="key != null and key != ''">
+                username LIKE CONCAT('%',#{key},'%') OR name LIKE CONCAT('%',#{key},'%')
+            </if>
+            <if test="roleid != null and roleid != ''">
+                AND roleid = #{roleid}
+            </if>
+        </where>
         Limit ${start},${size}
     </select>
     <select id="getTotal" resultType="Long">
         SELECT COUNT(*) FROM t_user
+    </select>
+    <select id="findByParamCount" resultType="Long">
+        SELECT COUNT(*) FROM
+        t_user
+        INNER JOIN t_role ON t_role.id = t_user.roleid
+        <where>
+            <if test="keyvalue != null and keyvalue !=''">
+                username LIKE CONCAT('%',${keyvalue},'%') OR name LIKE CONCAT('%',${keyvalue},'%')
+            </if>
+            <if test="roleid != null and roleid != ''">
+                AND roleid = #{roleid}
+            </if>
+        </where>
     </select>
     <select id="findById" resultType="User">
         SELECT t_user.*,t_role.id AS 'role.id',t_role.rolename AS 'role.rolename' FROM
@@ -32,6 +53,6 @@
         WHERE t_user.id = #{id}
     </select>
     <update id="alterUser" parameterType="User">
-        UPDATE t_user SET username=#{username},name=#{name},roleid=#{roleid} WHERE id=#{id}
+        UPDATE t_user SET username=#{username},name=#{name},roleid=#{roleid},weixin=#{weixin} ,enable=#{enable} WHERE id=#{id}
     </update>
 </mapper>

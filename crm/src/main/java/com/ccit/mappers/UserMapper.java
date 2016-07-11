@@ -10,6 +10,7 @@ public interface UserMapper {
     User findByUserName(String username);
     void alterPw(User user);
     List<User> findByParam(Map<String,Object>param);
+    Long findByParamCount(Map<String,Object>param);
     Long getTotal();
     void addUser(User user);
     void deleteById(Integer id);

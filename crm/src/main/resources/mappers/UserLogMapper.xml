@@ -6,9 +6,9 @@
         INSERT INTO t_userlog(userid,ip,logintime) VALUES (#{userid},#{ip},#{logintime})
     </insert>
     <select id="getTotal" resultType="Long">
-        SELECT COUNT(*) FROM t_userlog
+        SELECT COUNT(*) FROM t_userlog WHERE userid =#{userid}
     </select>
     <select id="findAll" resultType="UserLog">
-        SELECT * FROM t_userlog limit ${start},${size}
+        SELECT * FROM t_userlog WHERE userid =#{userid} limit ${start},${size}
     </select>
 </mapper>

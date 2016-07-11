@@ -9,8 +9,8 @@
     <title>员工管理</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="/static/bootstrap/css/dataTables.bootstrap.min.css">
@@ -20,146 +20,175 @@
     <%@include file="include/head.jsp"%>
     <%@include file="include/sidebar.jsp"%>
     <div class="content-wrapper">
+        <section class="content-header">
+            <h1>员工管理</h1>
+        </section>
         <section class="content">
-            <c:if test="${not empty message}">
-                <div class="bg-green">
-                    ${message}
-                </div>
-            </c:if>
-            <!--搜索-->
-            <div class="well well-sm">
-                    <a type="button" class="btn btn-success pull-right" href="javascript:;" id="add">新增员工</a>
-                    <form class="form-inline" method="get">
-                        <div class="form-group">
-                            <input type="text" placeholder="请输入员工" name="userName" class="form-control" id="bookName">
-                        </div>
-                        <div class="form-group">
-                            <select name="role" class="form-control" id="type">
-                                <option value="">请选择角色</option>
-                                <c:forEach items="${roleList}" var="role">
-                                    <option value="${role.id}" ${roleid == role.id?'selected':''}>${role.rolename}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <button type="button" class="btn btn-default" id="searchButton">搜索</button>
-                    </form>
-                </div>
-            <!--员工列表-->
-            <div class="box" id="UserLog">
-                <div class="box-header">
-                    <h1 class="box-title">员工列表</h1>
-                </div>
-                <div class="box-body">
-                    <div class="col-sm-12">
-                        <table id="user" class="table table-bordered table-striped dataTable">
-                            <thead>
-                            <tr role="row">
-                                <th>id</th>
-                                <th>员工</th>
-                                <th>真实姓名</th>
-                                <th>角色</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+            <%--<c:if test="${not empty message}">--%>
+                <%--<div class="bg-green">--%>
+                    <%--${message}--%>
+                <%--</div>--%>
+            <%--</c:if>--%>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">员工列表</h2>
                     </div>
-                </div>
-            </div>
-            <!--增加新员工-->
-            <div class="modal fade" id="addUser">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">新增员工</h4>
-                        </div>
-                        <div class="box box-info">
-                            <form class="form-horizontal" id="addNew">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">员工</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control"type="text" name="username">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">真实姓名</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">密码</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control" name="password">
-                                        </div>
-                                    </div>
+                    <div class="box-body">
+                        <!--搜索-->
+                        <div class="well well-sm">
+                            <a type="button" class="btn btn-success pull-right" href="javascript:;" id="add"><i class="fa fa-plus"></i> 新增</a>
+                            <form class="form-inline" method="get">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">角色</label>
-                                      <div class="col-sm-6">
-                                        <select name="roleid" class="form-control">
-                                          <c:forEach items="${roleList}" var="role">
+                                        <input type="text" placeholder="请输入账号或姓名" name="username" class="form-control" id="keyword" value="${username}">
+                                </div>
+                                <div class="form-group">
+                                    <select name="roleid" class="form-control" id="Role">
+                                        <option value="">请选择角色</option>
+                                        <c:forEach items="${roleList}" var="role">
                                             <option value="${role.id}" ${roleid == role.id?'selected':''}>${role.rolename}</option>
-                                          </c:forEach>
-                                        </select>
-                                      </div>
-                                 </div>
-                               </div>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-default" id="searchButton">搜索</button>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary" id="save">保存</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--修改员工-->
-            <div class="modal fade" id="alterUser">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">修改员工</h4>
-                        </div>
-                        <div class="box box-info">
-                            <form class="form-horizontal" id="alter">
-                                <div class="box-body">
-                                    <input type="hidden" name="id" id="id">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">员工</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control"type="text" name="username" id="username">
-                                        </div>
+                        <!--员工列表-->
+                        <div class="col-sm-12" id="UserLog">
+                                    <table id="user" class="table table-bordered dataTable">
+                                        <thead>
+                                        <tr role="row">
+                                            <th>id</th>
+                                            <th>账号</th>
+                                            <th>真实姓名</th>
+                                            <th>角色</th>
+                                            <th>微信号</th>
+                                            <th>状态</th>
+                                            <th>创建时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                        <!--增加新员工-->
+                        <div class="modal fade" id="addUser">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">新增用户</h4>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">真实姓名</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="name" id="name">
-                                        </div>
+                                    <div class="box box-info">
+                                        <form class="form-horizontal" id="addNew">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">账号</label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control"type="text" name="username">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">真实姓名</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" >密码(默认:000000)</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" value="000000" class="form-control" name="password">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">微信号</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="weixin">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">角色</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="roleid" class="form-control">
+                                                            <c:forEach items="${roleList}" var="role">
+                                                                <option value="${role.id}">${role.rolename}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">角色</label>
-                                        <div class="col-sm-6">
-                                            <select name="roleid" class="form-control" id="roleid">
-                                                <c:forEach items="${roleList}" var="role">
-                                                    <option value="${role.id}" ${roleid == role.id?'selected':''}>${role.rolename}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" id="save">保存</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary" id="saveAlter">保存</button>
+                        <!--修改员工-->
+                        <div class="modal fade" id="alterModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">编辑用户</h4>
+                                    </div>
+                                    <div class="box box-info">
+                                        <form class="form-horizontal" id="alterUser">
+                                            <div class="box-body">
+                                                <input type="hidden" name="id" id="id">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">账号</label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control"type="text" name="username" id="username">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">真实姓名</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="name" id="name">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">微信号</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="weixin" id="weixin">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">状态</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="enable" class="form-control" id="enable">
+                                                            <option value="true">正常</option>
+                                                            <option value="false">禁用</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">角色</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="roleid" class="form-control" id="roleid">
+                                                            <c:forEach items="${roleList}" var="role">
+                                                                <option value="${role.id}" ${roleid == role.id?'selected':''}>${role.rolename}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary" id="saveAlter">保存</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
         </section>
     </div>
 </div>
@@ -169,11 +198,16 @@
 <script src="/static/bootstrap/js/jquery.validate.min.js"></script>
 <script src="/static/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="/static/bootstrap/js/dataTables.bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/moment.js"></script>
 <script>
     $(function(){
      var dataTable= $("#user").DataTable({
            "serverSide":true,
-           "ajax":"/user/data.json",
+           "ajax":{url:"/admin/user/dataList",
+                data:function(dataSource){
+                    dataSource.username=$("#keyword").val();
+                    dataSource.roleid=$("#Role").val();
+           }},
            "order": [0,'desc'],
            "searching": false,
            "columns":[
@@ -181,14 +215,31 @@
                {"data":"username"},
                {"data":"name"},
                {"data":"role.rolename"},
+               {"data":"weixin"},
                {"data":function(row){
-                   return "<button class='btn-warning' rel='"+row.id+"'>修改</button>&nbsp;" +
-                           "<button class='btn-danger'rel='"+row.id+"'>删除</button>"
+                   if(row.enable == 1){
+                       return "<span class='label label-success'>正常</span>"
+                   }else{
+                       return "<span class='label label-danger'>禁用</span>"
+                   }
+               }} ,
+               {"data":function(row){
+                   var timestmap = row.creattime;
+                   return moment(timestmap).format("YYYY-MM-DD HH:mm");
+               }},
+               {"data":function(row){
+                   if(row.roleid == 1){
+                       return "";
+                   }else{
+                      return "<button class='btn-warning' rel='"+row.id+"'>修改</button>&nbsp;" +
+                              "<button class='btn-danger'rel='"+row.id+"'>重置密码</button>";
+                   }
                }}
            ],
+         "autoWidth": false,
            "lengthMenu":[5,10,20],
            "columnDefs":[{targets:0,"visible": false},
-               {"targets":[1,2,3,4],
+               {"targets":[1,2,3,4,5,6,7],
                    "orderable":false}],
            "language":{
                "search":"搜索",
@@ -200,7 +251,8 @@
                    "previous":   "上一页"
                },
                "info": "显示了第 _START_  条到第  _END_  条共  _TOTAL_ 条数据",
-               "infoEmpty":      "没有数据！"
+               "infoEmpty":      "没有数据！",
+               "infoFiltered":   "(从总共 _MAX_条数据查询得来 )"
            }
        })
        $("#add").click(function(){
@@ -215,18 +267,44 @@
            $("#addNew").submit();
        });
        $("#addNew").validate({
-           errorElemet:"span",
+           errorElement:"span",
            errorClass:"text-danger",
-           rules:{"username":{required:"true"},
-           "name":{required:"true"},
-           "password":{required:"true",rangelength:[5,10]},
-           "selectrole":{required:"true"}},
-           messages:{"username":{required:"请输入员工"},
-               "name":{required:"请输入真实姓名"},
-               "password":{required:"请输入密码",rangelength:"密码建议长度为5-10"},
-               "selectrole":{required:"请输入角色"}},
+           rules: {
+               username: {
+                   required: true,
+                   rangelength: [3, 10],
+                   remote:"/admin/user/check",
+               },
+               name: {
+                   required: true
+               },
+               password: {
+                   required: true,
+                   rangelength: [5, 10]
+               },
+               weixin:{
+                   required:true
+               }
+           },
+           messages: {
+               username: {
+                   required: "请输入用户名!",
+                   rangelength:"用户名建议长度为3-10",
+                   remote:"用户名已存在!"
+               },
+               name: {
+                   required: "请输入真实姓名!"
+               },
+               password: {
+                   required: "请输入密码!",
+                   rangelength: "密码建议长度为5-10!"
+               },
+               weixin:{
+                   required:"请输入微信号!"
+               }
+           },
            submitHandler:function(form){
-               $.post("/addUser",$(form).serialize()).done(function(data){
+               $.post("/admin/addUser",$(form).serialize()).done(function(data){
                    if(data == "success"){
                        $("#addUser").modal("hide");
                        dataTable.ajax.reload();
@@ -238,10 +316,10 @@
        });
        $(document).delegate(".btn-danger","click",function(){
            var id = $(this).attr("rel");
-          if(confirm("确认要删除吗?")){
-              $.get("/delete/"+id).done(function(data){
+          if(confirm("确认要重置吗?")){
+              $.get("/admin/reset/"+id).done(function(data){
                   if(data == "success"){
-                      dataTable.ajax.reload();
+                      alert("重置成功!")
                   }
               }).fail(function(){
                   alert("删除失败!")
@@ -249,36 +327,62 @@
           }
        });
        $(document).delegate(".btn-warning","click",function(){
-           $("#alterUser").modal({
+           $("#alterModal").modal({
                "show":"true",
                "backdrop":"static",
                "keyboard":false
            })
            var id = $(this).attr("rel");
-           $.get("/alter/"+id).done(function(data){
+           $.get("/admin/alter/"+id).done(function(data){
                $("#id").val(data.id);
                $("#username").val(data.username);
                $("#name").val(data.name);
+               $("#weixin").val(data.weixin);
+               $("#enable").val(data.enable.toString());
                $("#roleid").val(data.roleid);
            }).fail(function(){
                alert("操作失败!")
            })
        });
        $("#saveAlter").click(function(){
-           $("#alter").submit();
+           $("#alterUser").submit();
        });
-        $("#alter").validate({
+       $("#alterUser").validate({
             errorElement:"span",
             errorClass:"text-danger",
-            rules:{"username":{required:"true"},
-            "name":{required:"true"},"roleid":{required:"true"}},
-            messages:{"username":{required:"请输入员工!"},
-                "name":{required:"请输入真实姓名!"},"roleid":{required:"请选择角色!"}},
+            rules:{
+                username:{
+                    required:true
+                },
+                name: {
+                    required:true
+                },
+                weixin:{
+                    required:true
+                },
+                roleid:{
+                    required:true
+                }
+            },
+            messages:{
+                username:{
+                    required:"请输入用户名!"
+                },
+                name:{
+                    required:"请输入真实姓名!"
+                },
+                weixin:{
+                    required:"请输入微信号!"
+                },
+                roleid:{
+                    required:"请选择角色!"
+                }
+            },
             submitHandler:function(form){
-                $.post("/alter",$(form).serialize()).done(function(data){
+                $.post("/admin/alter",$(form).serialize()).done(function(data){
                     if(data == "success"){
-                        $("#alterUser").modal("hide");
-                        dataTable.ajax.reload;
+                        $("#alterModal").modal("hide");
+                        dataTable.ajax.reload();
                     }else{
                         alert("操作失败!")
                     }
@@ -286,7 +390,10 @@
                     alert("操作失败!")
                 })
             }
-        })
+        });
+       $("#searchButton").click(function(){
+           dataTable.ajax.reload();
+       })
     })
 </script>
 </body>

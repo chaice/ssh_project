@@ -1,12 +1,13 @@
 package com.ccit.controller;
 
-import com.ccit.pojo.LogTable;
+import com.ccit.pojo.DataTableResult;
 import com.ccit.pojo.Role;
 import com.ccit.pojo.User;
 import com.ccit.pojo.UserLog;
 import com.ccit.service.UserLogService;
 import com.ccit.service.UserService;
 import com.ccit.utils.LoginIp;
+import com.ccit.utils.LoginMessage;
 import com.ccit.utils.ShiroUtil;
 import com.google.common.collect.Maps;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -18,14 +19,12 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -61,14 +60,18 @@ public class HomeController {
                return "redirect:/";
            }
         } catch (LockedAccountException exception) {
-            attributes.addFlashAttribute("message", "该账号已被禁用");
+            attributes.addFlashAttribute("message", new LoginMessage("error","该账号已被禁用!"));
             return "redirect:/";
         } catch (AuthenticationException exception) {
-            attributes.addFlashAttribute("message", "账号或密码错误！");
+            attributes.addFlashAttribute("message", new LoginMessage("error","账号或密码错误!"));
             return "redirect:/";
         }
     }
 
+    @RequestMapping(value = "/alterPassword",method = RequestMethod.GET)
+    public String alter(){
+        return "alterPw";
+    }
     @ResponseBody
     @RequestMapping(value = "/form",method =RequestMethod.GET )
     public String testPW(@RequestParam("origin")String password){
@@ -89,77 +92,27 @@ public class HomeController {
     public String exit(RedirectAttributes attributes){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        attributes.addFlashAttribute("message","安全退出成功!");
+
+        attributes.addFlashAttribute("message",new LoginMessage("安全退出成功!"));
         return "redirect:/";
     }
+    @RequestMapping(value = "/lookLog",method = RequestMethod.GET)
+    public String lookLog(){
+        return "userLog";
+    }
     @ResponseBody
-    @RequestMapping(value = "/admin/log.json",method = RequestMethod.GET)
-    public LogTable<UserLog> table(HttpServletRequest request){
+    @RequestMapping(value = "/user/log",method = RequestMethod.GET)
+    public DataTableResult<UserLog> table(HttpServletRequest request){
        String draw = request.getParameter("draw");
        String start = request.getParameter("start");
        String size = request.getParameter("length");
        Long recordsTotal = logService.getTotal() ;
        Long recordsFiltered = logService.getTotal();
        List<UserLog> data = logService.findAll(start,size);
-       LogTable<UserLog> logTable = new LogTable<UserLog>(draw,recordsTotal,recordsFiltered,data);
+        DataTableResult<UserLog> logTable = new DataTableResult<UserLog>(draw,recordsTotal,recordsFiltered,data);
        return logTable;
     }
 
-    @RequestMapping(value = "/user",method = RequestMethod.GET)
-    public String userManage(Model model){
-        List<Role> roleList = userService.findAllRole();
-        model.addAttribute("roleList",roleList);
-        return "user";
-    }
-    @ResponseBody
-    @RequestMapping(value = "/user/data.json",method = RequestMethod.GET)
-    public LogTable<User> getUserData(HttpServletRequest request){
-        String draw = request.getParameter("draw");
-        String start = request.getParameter("start");
-        String size = request.getParameter("length");
 
-        Map<String,Object>map = Maps.newHashMap();
-        map.put("start",start);
-        map.put("size",size);
-        List<User> data = userService.finByParam(map);
-        Long recordsTotal = userService.getTotal() ;
-        Long recordsFiltered = userService.getTotal();
-        LogTable<User> userTable = new LogTable<User>(draw,recordsTotal,recordsFiltered,data);
-        return userTable;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/addUser",method = RequestMethod.POST)
-    public String addUser(User user,RedirectAttributes attributes){
-        logger.debug("user:{}",user);
-        String password = DigestUtils.md5Hex(user.getPassword());
-        user.setPassword(password);
-        userService.addUser(user);
-        attributes.addFlashAttribute("message","新增成功!");
-        return "success";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
-    public String deleteUser(@PathVariable("id")Integer id){
-        userService.deleteById(id);
-        return "success";
-    }
-
-    @ResponseBody
-    @RequestMapping(value ="alter/{id}",method = RequestMethod.GET)
-    public User alterUser(@PathVariable("id")Integer id){
-        User user = userService.findById(id);
-        return user;
-    }
-    @ResponseBody
-    @RequestMapping(value = "/alter",method = RequestMethod.POST)
-    public String alterUser(User user){
-        logger.debug("user:{}",user);
-        if(userService.alterUser(user)) {
-            return "success";
-        }
-        return "";
-    }
 }
 
