@@ -7,4 +7,17 @@
     <insert id="save" parameterType="Notice">
         INSERT INTO t_notice(title,context,realname,userid) VALUES(#{title},#{context},#{realname},#{userid})
     </insert>
+    <select id="findByParams" parameterType="map" resultType="Notice">
+        SELECT * FROM t_notice
+        ORDER BY id DESC
+        <if test="start != null and start !=''">
+             limit ${start},${length}
+        </if>
+    </select>
+    <select id="getCount" resultType="Long">
+        SELECT COUNT(*) FROM t_notice
+    </select>
+    <select id="findById" resultType="Notice">
+        SELECT * FROM t_notice WHERE id = #{id}
+    </select>
 </mapper>

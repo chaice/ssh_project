@@ -7,6 +7,8 @@ import com.ccit.utils.ShiroUtil;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
+import java.util.Map;
 
 @Named
 public class NoticeService {
@@ -18,5 +20,17 @@ public class NoticeService {
         notice.setRealname(user.getName());
         notice.setUserid(user.getId());
         noticeMapper.save(notice);
+    }
+
+    public List<Notice> findByParams(Map<String, Object> params) {
+        return noticeMapper.findByParams(params);
+    }
+
+    public Long getCount() {
+        return noticeMapper.getCount();
+    }
+
+    public Notice findById(Integer id) {
+        return noticeMapper.findById(id);
     }
 }

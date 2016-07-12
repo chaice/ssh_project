@@ -242,18 +242,18 @@
                {"targets":[1,2,3,4,5,6,7],
                    "orderable":false}],
            "language":{
-               "search":"搜索",
-               "lengthMenu":"每页显示_MENU_条数据",
-               "paginate": {
-                   "first":      "首页",
-                   "last":       "末页",
-                   "next":       "下一页",
-                   "previous":   "上一页"
-               },
-               "info": "显示了第 _START_  条到第  _END_  条共  _TOTAL_ 条数据",
-               "infoEmpty":      "没有数据！",
-               "infoFiltered":   "(从总共 _MAX_条数据查询得来 )"
-           }
+             "search":"搜索",
+             "lengthMenu":"每页显示_MENU_条数据",
+             "paginate": {
+                 "first":      "首页",
+                 "last":       "末页",
+                 "next":       "下一页",
+                 "previous":   "上一页"
+             },
+             "info": "显示了第 _START_  条到第  _END_  条共  _TOTAL_ 条数据",
+             "infoEmpty":      "没有数据！",
+             "infoFiltered":   "(从总共 _MAX_条数据查询得来 )"
+         }
        })
        $("#add").click(function(){
            $("#addNew").reset;

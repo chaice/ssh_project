@@ -32,7 +32,7 @@
                 <div class="box-header">
                     <h3 class="box-title">编辑公告</h3>
                 </div>
-                <form class="form-horizontal" method="post" id="addNotice" action="/notice/new">
+                <form class="form-horizontal" method="post" id="addNotice">
                     <div class="box-body">
                         <div class="form-group">
                             <label class="col-sm-1 control-label">标题</label>
@@ -76,7 +76,7 @@
                 $("#context").focus();
                 return;
             }
-           $("#addNotice").submit();
+          $("#addNotice").submit();
         })
     })
 </script>
