@@ -28,16 +28,20 @@
         <section class="content">
             <div class="box box-success">
                 <div class="box-header">
-                    <div class="btns pull-right">
-                        <div id="picker"><i class="fa fa-upload"></i> 上传文件</div>
-                        <button class="btn btn-success" id="new-dir"><i class="fa fa-plus"></i> 新建文件夹</button>
+                    <div class="btns">
+                        <div class="pull-right">
+                            <div id="picker"><i class="fa fa-upload"></i> 上传文件</div>
+                            <button class="btn btn-success" id="new-dir"><i class="fa fa-plus"></i> 新建文件夹</button>
+                        </div>
                     </div>
                 </div>
                 <div class="box-body">
                      <table class="table table-bordered">
                          <thead>
                              <tr>
-                                 <th>文件名</th>
+                                 <th>文件名
+                                    <c:if test="${fid != 0}"><a href="/document?fid=${pFid}" class="text-aqua pull-right"><i class="fa fa-mail-reply"></i> 返回上一级</a></c:if>
+                                 </th>
                                  <th>大小</th>
                                  <th>创建人</th>
                                  <th>上传时间</th>

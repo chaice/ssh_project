@@ -32,6 +32,9 @@ public class DocumentController {
     public String doucument(Model model, @RequestParam(required = false,defaultValue = "0")Integer fid){
        model.addAttribute("documentList",documentService.findAll(fid));
        model.addAttribute("fid",fid);
+       if(fid != 0){
+           model.addAttribute("pFid",documentService.download(fid).getFid());
+       }
         return "document/documentlist";
     }
     @RequestMapping(value = "/newdir",method = RequestMethod.POST)
