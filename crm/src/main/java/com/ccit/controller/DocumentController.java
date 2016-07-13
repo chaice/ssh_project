@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.inject.Inject;
 import java.io.*;
 
-@Controller
-@RequestMapping("/document")
+//@Controller
+//@RequestMapping("/document")
 public class DocumentController {
     Logger logger = LoggerFactory.getLogger(DocumentController.class);
     @Inject
@@ -42,11 +42,11 @@ public class DocumentController {
         documentService.add(dirname,fid);
         return "redirect:/document?fid="+fid;
     }
-    @RequestMapping(value = "/savefile",method = RequestMethod.POST)
-    public String loadFile(MultipartFile file,Integer fid) throws IOException {
-        documentService.saveFile(file,fid);
-        return "redirect:/document?fid="+fid;
-    }
+//    @RequestMapping(value = "/savefile",method = RequestMethod.POST)
+//    public String loadFile(MultipartFile file,Integer fid) throws IOException {
+//        documentService.saveFile(file,fid);
+//        return "redirect:/document?fid="+fid;
+//    }
     @RequestMapping(value = "/download/{id}",method = RequestMethod.GET)
     public ResponseEntity<InputStreamResource> download(@PathVariable("id")Integer id) throws UnsupportedEncodingException, NotFoundException, FileNotFoundException {
         Document document = documentService.download(id);
