@@ -2,7 +2,6 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
->
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,7 +120,7 @@
             $("#new-dir-form").submit();
         });
         uploader.on("uploadSuccess",function(){
-
+            location.reload();
         });
         uploader.on("uploadError",function(file){
             alert("文件上传失败!")

@@ -26,10 +26,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <small><i class="fa fa-comments-o"></i></small>&nbsp;${notice.title}
-                  &nbsp;&nbsp;&nbsp;
-                    <small class="text-muted">发表人:</small>${notice.realname}
-                  &nbsp;&nbsp;&nbsp;
+                <small><i class="fa fa-comments-o"></i></small>&nbsp;${notice.title}&nbsp;&nbsp;&nbsp;
+                    <small class="text-muted">发表人:</small>${notice.realname}&nbsp;&nbsp;&nbsp;
                     <small class="text-center"><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${notice.creattime}" pattern="y-M-d H:m"></fmt:formatDate></small>
                 <shiro:hasRole name="经理">
                     <a type="button" class="btn btn-success pull-right" href="/notice/new"><i class="fa fa-plus"></i> 新增公告</a>
