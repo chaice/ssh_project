@@ -24,7 +24,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <small><i class="fa fa-comments-o"></i></small>
+                <small><i class="fa fa-comments-o"></i></small>&nbsp;
                 公告列表
                 <shiro:hasRole name="经理">
                 <a type="button" class="btn btn-success pull-right" href="/notice/new"><i class="fa fa-plus"></i> 新增公告</a>

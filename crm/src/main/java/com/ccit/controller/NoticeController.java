@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -49,10 +51,25 @@ public class NoticeController {
         DataTableResult<Notice> result = new DataTableResult<Notice>(show,recordsTotal,recordsFiltered,noticeList);
         return result;
     }
-    @RequestMapping(value = "/notice/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/notice/view/{id}",method = RequestMethod.GET)
     public String viewNotice(@PathVariable("id")Integer id, Model model){
         Notice notice = noticeService.findById(id);
         model.addAttribute("notice",notice);
         return "notice/notice_view";
+    }
+    @RequestMapping(value = "/load/file",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> fileLoad(MultipartFile file) throws IOException {
+        Map<String,Object> result = Maps.newHashMap();
+        if(!file.isEmpty()){
+            String path = noticeService.saveFile(file.getInputStream());
+            result.put("success",true);
+            result.put("file_path",path);
+        }else{
+            result.put("success",false);
+            result.put("msg","上传失败");
+        }
+        return result;
+
     }
 }

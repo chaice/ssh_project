@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/dist/css/skins/skin-blue.min.css">
-    <link rel="stylesheet" href="/static/bootstrap/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/static/default.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -25,7 +26,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <small><i class="fa fa-comments-o"></i></small>${notice.title}
+                <small><i class="fa fa-comments-o"></i></small>&nbsp;${notice.title}
                   &nbsp;&nbsp;&nbsp;
                     <small class="text-muted">发表人:</small>${notice.realname}
                   &nbsp;&nbsp;&nbsp;
@@ -47,5 +48,7 @@
 <script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/dist/js/app.min.js"></script>
+<script src="/static/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

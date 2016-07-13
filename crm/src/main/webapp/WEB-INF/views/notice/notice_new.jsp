@@ -55,7 +55,7 @@
         </section>
     </div>
 </div>
-<script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="/static/simditor/scripts/jquery.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/dist/js/app.min.js"></script>
 <script src="/static/simditor/scripts/module.min.js"></script>
@@ -65,7 +65,11 @@
 <script>
     $(function(){
         var editor = new Simditor({
-            textarea: $('#context')
+            textarea: $('#context'),
+            upload:{
+                url:"/load/file",
+                fileKey:"file"
+            }
         });
         $("#save").click(function(){
            if(!$("#title").val()){
