@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - @localhost" uuid="feff90c3-c8be-4c98-8d79-607f21d03e75">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ccit_crm.*</schema-pattern>
+      <default-schemas>sys.*</default-schemas>
+    </data-source>
+  </component>
+</project>

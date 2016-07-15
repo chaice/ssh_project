@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccit.mappers.CustomerMapper">
+    <cache/>
+    <select id="findByParams" resultType="Customer">
+        SELECT * FROM t_customer
+        <where>
+            <if test="userid != null and userid !=''">
+                userid = #{userid} or (userid is null)
+            </if>
+            <if test="keyword != null and keyword !=''">
+                and name like concat('%',#{keyword},'%') or pinyin like concat('%',#{keyword},'%')
+                or tel like concat('%',#{keyword},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit ${start},${length}
+    </select>
+    <select id="countByParams" resultType="Long">
+        SELECT COUNT(*) FROM t_customer
+        <where>
+            <if test="userid != null and userid !='' ">
+                userid = #{userid} or (userid is null)
+            </if>
+            <if test="keyword != null and keyword !=''">
+                and name like concat('%',#{keyword},'%') or pinyin like concat('%',#{keyword},'%')
+                or tel like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
+    <select id="count" resultType="Long">
+        SELECT COUNT(*) FROM t_customer
+    </select>
+    <select id="findById" resultType="Customer">
+        SELECT * FROM t_customer WHERE id = #{id}
+    </select>
+    <select id="findAllCompany" resultType="Customer">
+        SELECT * FROM t_customer WHERE type = #{type}
+        and userid = #{userid} or (userid is null)
+    </select>
+    <insert id="insert" parameterType="Customer">
+        INSERT INTO t_customer(name,tel,address,userid,weixin,pinyin,email,rank,companyid,companyname,type,creatuser)
+        VALUES (#{name},#{tel},#{address},#{userid},#{weixin},#{pinyin},#{email},#{rank},#{companyid},#{companyname},#{type},#{creatuser})
+    </insert>
+    <select id="findByCompanyId" resultType="Customer">
+        SELECT * FROM  t_customer WHERE companyid = #{companyid}
+    </select>
+    <update id="update">
+        UPDATE t_customer SET name=#{name},tel=#{tel},address=#{address},weixin=#{weixin},
+        pinyin=#{pinyin},email=#{email},rank=#{rank},companyid=#{companyid},companyname=#{companyname}
+        where id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM t_customer WHERE id=#{id}
+    </delete>
+
+</mapper>
