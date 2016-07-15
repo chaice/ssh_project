@@ -13,6 +13,7 @@ com\ccit\controller\DocumentContro.class
 com\ccit\utils\LoginMessage.class
 com\ccit\pojo\Customer.class
 com\ccit\pojo\Document.class
+com\ccit\utils\MeCard.class
 com\ccit\controller\AdminController.class
 com\ccit\utils\LoginIp.class
 com\ccit\service\ShiroRealm.class

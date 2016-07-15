@@ -37,11 +37,11 @@
                         <h4>客户信息</h4>
                     </div>
                     <div class="box-body">
-                       <table class="table table-bordered">
+                       <table class="table table-responsive">
                            <c:choose>
                                <c:when test="${customer.type == 'person'}">
                                    <tr>
-                                       <th rowspan="3"><img src="/customer/build/${customer.id}" title="客户信息二维码"></th>
+                                       <th rowspan="3" style="width: 100px;height:100px;padding: 0px "><img src="/customer/build/${customer.id}" title="客户信息二维码"></th>
                                        <th>名称:&nbsp;${customer.name}</th>
                                        <th>电话:&nbsp;${customer.tel}</th>
                                        <th>微信号:&nbsp;${customer.weixin}</th>
@@ -57,7 +57,7 @@
                                </c:when>
                                <c:otherwise>
                                    <tr>
-                                       <th rowspan="3"><img src="/customer/build/${customer.id}" title="客户信息二维码"></th>
+                                       <th rowspan="3" style="width: 100px;height:100px;padding: 0px "><img src="/customer/build/${customer.id}" title="客户信息二维码"></th>
                                        <th colspan="2">名称:&nbsp;${customer.name}</th>
                                        <th colspan="2">电话:&nbsp;${customer.tel}</th>
 

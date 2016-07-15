@@ -4,7 +4,14 @@ import com.ccit.pojo.Customer;
 import com.ccit.pojo.DataTableResult;
 import com.ccit.service.CustomerService;
 import com.ccit.service.UserService;
+import com.ccit.utils.MeCard;
 import com.google.common.collect.Maps;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +96,13 @@ public class CustomerController {
         return "redirect:/customer";
     }
     @RequestMapping(value = "/build/{id}",method = RequestMethod.GET)
-    public void build(@PathVariable Integer id){
-        
+    public void build(@PathVariable Integer id, HttpServletResponse response) throws WriterException, IOException {
+        Map<EncodeHintType,String> hints = Maps.newHashMap();
+        hints.put(EncodeHintType.CHARACTER_SET,"UTF-8");
+        Customer customer = customerService.findById(id);
+        String mecrad = MeCard.getQRcode(customer);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(mecrad, BarcodeFormat.QR_CODE,200,200,hints);
+        OutputStream outputStream = response.getOutputStream();
+        MatrixToImageWriter.writeToStream(bitMatrix, "png",outputStream);
     }
 }
