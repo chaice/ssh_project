@@ -35,8 +35,8 @@
         SELECT * FROM t_customer WHERE id = #{id}
     </select>
     <select id="findAllCompany" resultType="Customer">
-        SELECT * FROM t_customer WHERE type = #{type}
-        and userid = #{userid} or (userid is null)
+        SELECT * FROM t_customer WHERE type = 'company'
+        and (userid = #{userid} or userid is null)
     </select>
     <insert id="insert" parameterType="Customer">
         INSERT INTO t_customer(name,tel,address,userid,weixin,pinyin,email,rank,companyid,companyname,type,creatuser)
@@ -47,6 +47,11 @@
     </select>
     <update id="update">
         UPDATE t_customer SET name=#{name},tel=#{tel},address=#{address},weixin=#{weixin},
+        pinyin=#{pinyin},email=#{email},rank=#{rank},companyid=#{companyid},companyname=#{companyname}
+        where id=#{id}
+    </update>
+    <update id="updateUser">
+        UPDATE t_customer SET userid=#{userid},creatuser=#{creatuser},name=#{name},tel=#{tel},address=#{address},weixin=#{weixin},
         pinyin=#{pinyin},email=#{email},rank=#{rank},companyid=#{companyid},companyname=#{companyname}
         where id=#{id}
     </update>

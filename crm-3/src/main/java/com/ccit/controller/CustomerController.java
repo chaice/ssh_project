@@ -3,13 +3,12 @@ package com.ccit.controller;
 import com.ccit.pojo.Customer;
 import com.ccit.pojo.DataTableResult;
 import com.ccit.service.CustomerService;
+import com.ccit.service.UserService;
 import com.google.common.collect.Maps;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +20,8 @@ import java.util.Map;
 public class CustomerController {
     @Inject
     private CustomerService customerService;
+    @Inject
+    private UserService userService;
     @RequestMapping(method = RequestMethod.GET)
     public String customer(Model model){
         List<Customer> company = customerService.findAllCompany();
@@ -65,5 +66,25 @@ public class CustomerController {
     @RequestMapping(value = "/update/{id}",method = RequestMethod.GET)
     public Customer update(@PathVariable Integer id){
         return customerService.findById(id);
+    }
+    @RequestMapping(value = "/view/{id}",method =RequestMethod.GET)
+    public String view(@PathVariable Integer id,Model model){
+        model.addAttribute("customer",customerService.findById(id));
+        model.addAttribute("userlist",userService.findAll());
+        return "customer/view";
+    }
+    @RequestMapping(value = "/public/{id}",method = RequestMethod.GET)
+    public String transformPublic(@PathVariable Integer id) throws NotFoundException {
+        customerService.tranformPublic(id);
+        return "redirect:/customer";
+    }
+    @RequestMapping(value = "/transformUser",method = RequestMethod.POST)
+    public String transform(Integer userid,@RequestParam Integer id) throws NotFoundException {
+        customerService.transformUser(id,userid);
+        return "redirect:/customer";
+    }
+    @RequestMapping(value = "/build/{id}",method = RequestMethod.GET)
+    public void build(@PathVariable Integer id){
+        
     }
 }

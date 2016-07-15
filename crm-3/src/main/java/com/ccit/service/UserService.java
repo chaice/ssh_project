@@ -21,8 +21,8 @@ public class UserService {
     private UserLogMapper logMapper;
     @Inject
     private RoleMapper roleMapper;
-    public User findUser(String username){
-        return userMapper.findByUserName(username);
+    public List<User> findAll(){
+        return userMapper.findAll();
     }
     public void alterPw(String password) {
         User user = ShiroUtil.getPrincipal();

@@ -18,11 +18,13 @@ public interface CustomerMapper {
 
     void insert(Customer customer);
 
-    List<Customer> findAllCompany(@Param("type") String type,@Param("userid") Integer userid);
+    List<Customer> findAllCompany(Integer userid);
     
     List<Customer> findByCompanyId(Integer companyid);
 
     void update(Customer customer);
 
     void delete(Integer id);
+
+    void updateUser(Customer customer);
 }

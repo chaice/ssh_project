@@ -44,9 +44,6 @@
                                <th>微信号</th>
                                <th>地址</th>
                                <th>客户等级</th>
-                               <shiro:hasRole name="经理">
-                                   <th>创建人</th>
-                               </shiro:hasRole>
                                <th>创建时间</th>
                                <th>操作</th>
                            </tr>
@@ -207,7 +204,11 @@
                     if(row.type =="company"){
                        return "<i class='fa fa-building-o'></i> <a href='/customer/view/"+row.id+"'>"+row.name+"</a>"
                     }else{
-                        return "<i class='fa fa-user'></i> <a>"+row.name+"</a>"+ "&nbsp;<a>"+row.companyname+"</a>"
+                        if(row.companyid == null){
+                            return "<i class='fa fa-user'></i> <a href='/customer/view/"+row.id+"'>"+row.name+"</a>"
+                        }else{
+                            return "<i class='fa fa-user'></i> <a href='/customer/view/"+row.id+"'>"+row.name+"</a>"+ "&nbsp;"+row.companyname
+                        }
                     }
                 }},
                 {"data":"tel"},
@@ -216,9 +217,6 @@
                 {"data":"address"},
                 {"data":function(row){
                    return "<span style='color: darkorange'>"+row.rank+"<span>"
-                }},
-                {"data":function(row){
-                   return <shiro:hasRole name="经理">row.creatuser</shiro:hasRole>
                 }},
                 {"data":function(row){
                     var time = moment(row.creattime).format("YYYY-MM-DD HH:mm");
@@ -254,9 +252,12 @@
         });
         $("#company").click(function(){
             $(this)[0].check;
-            $("#belong").css("visibility","hidden");
-        })
-        $("#belong").show();
+            $("#belong")[0].setAttribute("style","visibility:hidden");
+        });
+        $("#person").click(function(){
+            $(this)[0].check;
+            $("#belong")[0].setAttribute("style","visibility:visible");
+        });
         $("#save-btn").click(function(){
             $("#newForm").submit();
         });
@@ -283,7 +284,7 @@
                 $.post("/customer/new",$(form).serialize()).done(function(data){
                         if(data == "success"){
                             $("#customerMoadl").modal("hide");
-                            dataTable.ajax.reload();
+                            location.reload();
                         }
                 }).fail(function(){
                     alert("数据异常!")

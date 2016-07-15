@@ -2,11 +2,13 @@ package com.ccit.service;
 
 import com.ccit.mappers.CustomerMapper;
 import com.ccit.mappers.RoleMapper;
+import com.ccit.mappers.UserMapper;
 import com.ccit.pojo.Customer;
 import com.ccit.pojo.Role;
 import com.ccit.pojo.User;
 import com.ccit.utils.PinYinUtil;
 import com.ccit.utils.ShiroUtil;
+import org.apache.ibatis.javassist.NotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,6 +21,8 @@ public class CustomerService {
     private CustomerMapper customerMapper;
     @Inject
     private RoleMapper roleMapper;
+    @Inject
+    private UserMapper userMapper;
     public List<Customer> findByParams(Map<String, Object> params) {
         User user = ShiroUtil.getPrincipal();
         Role role = roleMapper.findById(user.getRoleid());
@@ -55,7 +59,7 @@ public class CustomerService {
     }
 
     public List<Customer> findAllCompany() {
-        return customerMapper.findAllCompany(Customer.TYPE_COMPANY,ShiroUtil.getPrincipal().getId());
+        return customerMapper.findAllCompany(ShiroUtil.getPrincipal().getId());
     }
 
     public void deleteById(Integer id) {
@@ -82,12 +86,39 @@ public class CustomerService {
                 }
             }
             customerMapper.update(customer);
+        }else {
+            if(customer.getCompanyid() != null){
+                customer.setCompanyname(customerMapper.findById(customer.getCompanyid()).getName());
+            }
+            customerMapper.update(customer);
         }
-        customer.setCompanyname(customerMapper.findById(customer.getCompanyid()).getName());
-        customerMapper.update(customer);
     }
 
     public Customer findById(Integer id) {
        return customerMapper.findById(id);
+    }
+
+    public void tranformPublic(Integer id) throws NotFoundException {
+        User user = ShiroUtil.getPrincipal();
+        Role role = roleMapper.findById(user.getRoleid());
+        Customer customer = customerMapper.findById(id);
+        if(!role.getRolename().equals("经理") && !user.getId().equals(customer.getUserid())) {
+            throw new NotFoundException("没有发现数据");
+        }
+        customer.setCreatuser("");
+        customer.setUserid(null);
+        customerMapper.updateUser(customer);
+    }
+
+    public void transformUser(Integer id, Integer userid) throws NotFoundException {
+        User user = ShiroUtil.getPrincipal();
+        Role role = roleMapper.findById(user.getRoleid());
+        Customer customer = customerMapper.findById(id);
+        if(!role.getRolename().equals("经理") || !user.getId().equals(customer.getUserid())) {
+            throw new NotFoundException("没有发现数据");
+        }
+        customer.setUserid(userid);
+        customer.setCreatuser(userMapper.findById(userid).getName());
+        customerMapper.updateUser(customer);
     }
 }
