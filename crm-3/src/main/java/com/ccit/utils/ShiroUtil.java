@@ -11,6 +11,6 @@ public class ShiroUtil {
         return (User) subject.getPrincipal();
     }
     public static boolean isManager() {
-        return getPrincipal().getRole().getRolename().equals("经理");
+        return getPrincipal().getRoleid().equals(2);
     }
 }

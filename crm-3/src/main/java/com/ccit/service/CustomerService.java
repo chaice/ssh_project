@@ -121,4 +121,11 @@ public class CustomerService {
         customer.setCreatuser(userMapper.findById(userid).getName());
         customerMapper.updateUser(customer);
     }
+
+    public List<Customer> findAll() {
+        if(ShiroUtil.isManager()){
+            return customerMapper.findAll(null);
+        }
+        return  customerMapper.findAll(ShiroUtil.getPrincipal().getId());
+    }
 }

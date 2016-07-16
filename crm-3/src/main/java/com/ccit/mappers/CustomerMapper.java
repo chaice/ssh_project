@@ -27,4 +27,6 @@ public interface CustomerMapper {
     void delete(Integer id);
 
     void updateUser(Customer customer);
+
+    List<Customer> findAll(@Param("userid") Integer userid);
 }
