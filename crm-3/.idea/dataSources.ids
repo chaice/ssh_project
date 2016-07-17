@@ -338,7 +338,7 @@
       </column>
       <column id="91" parent="9" name="contenttype">
         <comment>类型</comment>
-        <data-type>varchar(45)</data-type>
+        <data-type>text</data-type>
       </column>
       <column id="92" parent="9" name="size">
         <comment>文件的大小</comment>

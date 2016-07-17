@@ -2,7 +2,6 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -14,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/dist/css/skins/skin-blue.min.css">
-    <link rel="stylesheet" href="/static/default.css">
+    <link rel="stylesheet" href="/static/webuploader/webupload.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -117,18 +116,20 @@
             <section class="col-lg-5">
                 <div class="box box-comment">
                     <div class="box-header">
-                        <h4>相关文件<button class="btn btn-info pull-right" id="upload"><i class="fa fa-upload"></i></button></h4>
+                        <h4>相关文件
+                            <span class="pull-right" id="picker">
+                                <i class="fa fa-upload"></i>
+                            </span>
+                        </h4>
                     </div>
                     <div class="box-body">
                         <table class="table">
                             <c:forEach items="${salesFile}" var="file">
                                 <tr>
-                                    <a href="">${file.name}</a> <i class="fa fa-download pull-right"></i>
+                                   ${file.name}<a href="/sales/down/${file.id}"> <i class="fa fa-download pull-right"></i></a>
                                 </tr>
                             </c:forEach>
                         </table>
-                    </div>
-                    <div class="box-footer no-border">
                     </div>
                 </div>
                 <div class="box box-warning">
@@ -149,6 +150,7 @@
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/dist/js/app.min.js"></script>
 <script src="/static/bootstrap/js/jquery.timeago.js"></script>
+<script src="/static/webuploader/webuploader.min.js"></script>
 <script>
     $(function () {
         $("time.timeago").timeago();
@@ -166,6 +168,14 @@
             }
             $("#logform").submit();
         });
+        var uploader = WebUploader.create({
+            swf:"/static/webuploader/Uploader.swf",
+            server:"/sales/upload",
+            pick:"#picker",
+            auto:true,
+            formData:{"salesid":${sales.id}}
+        })
+
     })
 </script>
 </body>

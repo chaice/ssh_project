@@ -10,13 +10,21 @@ import com.ccit.service.SalesLogService;
 import com.ccit.service.SalesService;
 import com.google.common.collect.Maps;
 import org.apache.ibatis.javassist.NotFoundException;
-import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +39,8 @@ public class SalesController {
     private SalesFileService salesFileService;
     @Inject
     private SalesLogService salesLogService;
+    @Value("${filepath}")
+    private String filepath;
     @RequestMapping(method = RequestMethod.GET)
     public String salesList(Model model){
         model.addAttribute("cuslist",customerService.findAll());
@@ -95,5 +105,29 @@ public class SalesController {
     public String saleslog(@RequestParam()Integer salesid,@RequestParam()String context){
         salesLogService.addlog(salesid, context);
         return "redirect:/sales/view/"+salesid;
+    }
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public String fileUpload(MultipartFile file, @RequestParam("salesid")Integer salesid) throws FileNotFoundException {
+       String filename = salesFileService.addFile(file,salesid);
+        return "redirect:/sales/view/"+salesid;
+    }
+    @RequestMapping(value = "/down/{id}",method = RequestMethod.GET)
+    public ResponseEntity<InputStreamResource> filedown(@PathVariable Integer id) throws NotFoundException, UnsupportedEncodingException, FileNotFoundException {
+        SalesFile salesFile = salesFileService.findById(id);
+        if(salesFile == null){
+            throw new NotFoundException("没有发现文件!");
+        }
+        String filename = new String(salesFile.getName().getBytes("UTF-8"),"ISO-8859-1");
+        File file = new File(filepath,salesFile.getFilename());
+        if(!file.exists()){
+            throw new NotFoundException("没有找到!");
+        }
+        FileInputStream input = new FileInputStream(file);
+        return ResponseEntity
+                .ok()
+                .header("Context-Disposition","attachment;filename=\""+filename+"\"")
+                .contentType(MediaType.parseMediaType(salesFile.getContenttype()))
+                .contentLength(file.length())
+                .body(new  InputStreamResource(input));
     }
 }

@@ -7,4 +7,11 @@
     <select id="findBySalesId" resultType="SalesFile">
         SELECT * FROM t_file WHERE salesid = #{salesid}
     </select>
+    <insert id="addFile">
+        INSERT INTO t_file(salesid,name,filename,contenttype,size)
+        VALUES(#{salesid},#{name},#{filename},#{contenttype},#{size})
+    </insert>
+    <select id="findById" resultType="SalesFile">
+        SELECT * FROM t_file WHERE id = #{id}
+    </select>
 </mapper>
