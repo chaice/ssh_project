@@ -12,4 +12,8 @@ public interface SalesLogMapper {
     void add(SalesLog salesLog);
 
     SalesLog findByid(Integer id);
+
+    SalesLog findByContext(String context);
+
+    void deleteBySalesId(Integer salesid);
 }

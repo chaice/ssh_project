@@ -36,4 +36,12 @@
         INSERT INTO t_sales(name,userid,value,progress,creatuser,customerid,customername)
         VALUES(#{name},#{userid},#{value},#{progress},#{creatuser},#{customerid},#{customername})
     </insert>
+    <delete id="delete">
+        DELETE FROM t_sales WHERE id=#{id}
+    </delete>
+    <update id="update">
+        UPDATE t_sales SET name=#{name},value=#{value},progress=#{progress},lasttime=#{lasttime},customerid=#{customerid},
+        customername=#{customername} where id=#{id}
+    </update>
+
 </mapper>

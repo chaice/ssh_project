@@ -8,4 +8,6 @@ import java.util.List;
 public interface SalesFileMapper {
 
     List<SalesFile> findBySalesId(Integer salesid);
+
+    void deleteBySalesId(Integer salesid);
 }

@@ -19,4 +19,8 @@ public interface SalesMapper {
     void add(Sales sales);
 
     Sales findById(@Param("id") Integer id, @Param("userid") Integer userid);
+
+    void delete(Integer id);
+
+    void update(Sales sales);
 }

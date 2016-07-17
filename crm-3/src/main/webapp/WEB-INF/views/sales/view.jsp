@@ -38,7 +38,7 @@
                        </tr>
                        <tr class="active">
                            <th>关联客户:<a href="/customer/view/${sales.customerid}">${sales.customername}</a></th>
-                           <th>最后跟进时间:<fmt:formatDate value="${sales.lasttime}" pattern="y-M-d H:m"></fmt:formatDate></th>
+                           <th>最后跟进时间:${sales.lasttime}</th>
                            <th>完成时间:<fmt:formatDate value="${sales.completetime}" pattern="y-M-d H:m"></fmt:formatDate></th>
                        </tr>
                        <tr>
@@ -47,10 +47,32 @@
                    </table>
                 </div>
             </div>
+            <div class="modal fade"  id="logmoadl">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">请输入记录内容</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="logform" action="/sales/addlog" method="post">
+                                <input type="hidden" value="${sales.id}"name="salesid">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="context" id="context">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="savelog">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <section class="col-lg-7">
                 <div class="box box-info">
                     <div class="box-header">
-                        <h4>跟进记录 <button class="btn btn-warning pull-right"><i class="fa fa-plus"></i> 增加记录</button></h4>
+                        <h4>跟进记录 <button class="btn btn-warning pull-right" id="addlog"><i class="fa fa-plus"></i> 增加记录</button></h4>
                     </div>
                     <div class="box-body">
                         <ul class="timeline">
@@ -66,7 +88,7 @@
                                            <i class="fa fa-user bg-blue"></i>
                                            <div class="timeline-item">
                                                <!--显示时间-->
-                                               <span class="time"><i class="fa fa-clock-o"></i> 相对时间</span>
+                                               <span class="time"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="${log.followtime}"></time></span>
                                                <h3 class="timeline-header bg-info">${log.context}</h3>
                                            </div>
                                        </li>
@@ -81,8 +103,8 @@
                                            <i class="fa fa-hand-paper-o bg-aqua"></i>
                                            <div class="timeline-item">
                                                <!--显示时间-->
-                                               <span class="time"><i class="fa fa-clock-o"></i> 相对时间</span>
-                                               <h3 class="timeline-header bg-teal">${log.context}</h3>
+                                               <span class="time"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="${log.followtime}"></time></span>
+                                               <h3 class="timeline-header bg-info">${log.context}</h3>
                                            </div>
                                        </li>
                                    </c:otherwise>
@@ -95,7 +117,7 @@
             <section class="col-lg-5">
                 <div class="box box-comment">
                     <div class="box-header">
-                        <h4>相关文件<button class="btn btn-info pull-right"><i class="fa fa-upload"></i></button></h4>
+                        <h4>相关文件<button class="btn btn-info pull-right" id="upload"><i class="fa fa-upload"></i></button></h4>
                     </div>
                     <div class="box-body">
                         <table class="table">
@@ -114,6 +136,7 @@
                         <h4>待办事项</h4>
                     </div>
                     <div class="box-body">
+
                     </div>
                     <div class="box-footer no-border">
                     </div>
@@ -125,6 +148,25 @@
 <script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/dist/js/app.min.js"></script>
-<script src="/static/highlight.pack.js"></script>
+<script src="/static/bootstrap/js/jquery.timeago.js"></script>
+<script>
+    $(function () {
+        $("time.timeago").timeago();
+        $("#addlog").click(function () {
+            $("#logmoadl").modal({
+                show:true,
+                keyBoard:false,
+                backdrop:"static"
+            })
+        });
+        $("#savelog").click(function () {
+            if(!$("#context").val()){
+                $("#context").focus();
+                return;
+            }
+            $("#logform").submit();
+        });
+    })
+</script>
 </body>
 </html>

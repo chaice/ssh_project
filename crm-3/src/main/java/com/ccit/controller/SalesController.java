@@ -10,12 +10,10 @@ import com.ccit.service.SalesLogService;
 import com.ccit.service.SalesService;
 import com.google.common.collect.Maps;
 import org.apache.ibatis.javassist.NotFoundException;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -77,5 +75,25 @@ public class SalesController {
         model.addAttribute("salesFile",salesFiles);
         model.addAttribute("sales",sales);
         return "sales/view";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/update/{id}",method = RequestMethod.GET)
+    public Sales getSales(@PathVariable Integer id) throws NotFoundException {
+        if(salesService.findBy(id) != null){
+            return salesService.findBy(id);
+        }else{
+            throw new NotFoundException("没有发现!");
+        }
+    }
+    @ResponseBody
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String updateSales(Sales sales){
+        salesService.update(sales);
+        return "success";
+    }
+    @RequestMapping(value = "/addlog",method = RequestMethod.POST)
+    public String saleslog(@RequestParam()Integer salesid,@RequestParam()String context){
+        salesLogService.addlog(salesid, context);
+        return "redirect:/sales/view/"+salesid;
     }
 }

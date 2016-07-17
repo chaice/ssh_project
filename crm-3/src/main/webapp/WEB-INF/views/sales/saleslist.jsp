@@ -131,6 +131,52 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="updatemoadl">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">新增机会</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="updateform">
+                                <input type="hidden" id="id" name="id">
+                                <div class="form-group">
+                                    <label class="control-label">机会名</label>
+                                    <input type="text" class="form-control" name="name" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">交易价值</label>
+                                    <input class="form-control" type="text" name="value" id="value">
+                                </div>
+                                <div class="form-group">
+                                    <label >关联客户</label>
+                                    <select name="customerid" id="customerid" class="form-control">
+                                        <c:forEach items="${cuslist}" var="cus">
+                                            <option value="${cus.id}" ${customerid == cus.id?'select':''}>${cus.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">进度</label>
+                                    <select name="progress" class="form-control" id="progress">
+                                        <option value="初次接触">初次接触</option>
+                                        <option value="确认意向">确认意向</option>
+                                        <option value="提供合同">提供合同</option>
+                                        <option value="交易搁浅">交易搁浅</option>
+                                        <option value="交易完成">交易完成</option>
+                                        <option value="交易失败">交易失败</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="saveupdate">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </div>
@@ -158,7 +204,7 @@
                   {"data":function (row) {
                       if(row.progress == "交易失败"){
                           return "<a class='btn btn-danger'>"+row.progress+"</a>"
-                      }else if(row.progress == "交易成功"){
+                      }else if(row.progress == "交易完成"){
                           return "<a class='btn btn-success'>"+row.progress+"</a>"
                       }else if(row.progress == "初次接触"){
                           return "<a class='btn btn-default'>"+row.progress+"</a>"
@@ -167,7 +213,7 @@
                       }else if(row.progress == "确认意向") {
                           return "<a class='btn btn-primary'>"+row.progress+"</a>"
                       }else if(row.progress == "提供合同") {
-                          return "<a class='btn btn-github'>"+row.progress+"</a>"
+                          return "<a class='btn btn-facebook'>"+row.progress+"</a>"
                       } else{
                           return "<a class='btn btn-info'>"+row.progress+"</a>"
                       }
@@ -241,6 +287,50 @@
                 })
             }
         });
+        $(document).delegate(".btn-warning","click",function () {
+            var id = $(this).attr("rel");
+            $("#updatemoadl").modal({
+                show:true,
+                keyBoard:false,
+                backdrop:'static'
+            });
+            $.get("/sales/update/"+id).done(function (data) {
+                if(data != null){
+                    $("#id").val(data.id);
+                    $("#name").val(data.name);
+                    $("#value").val(data.value);
+                    $("#customerid").val(data.customerid);
+                    $("#progress").val(data.progress);
+                }
+            }).fail(function () {
+                alert("数据获取异常!")
+            })
+        });
+        $("#saveupdate").click(function () {
+            $("#updateform").submit();
+        });
+        $("#updateform").validate({
+            errorElement:"span",
+            errorClass:"text-danger",
+            rules:{
+                name:{required:true},
+                value:{required:true}
+            },
+            messages:{
+                name:{required:"请输入机会名!"},
+                value:{required:"请输入价值!"}
+            },
+            submitHandler:function (form) {
+                $.post("/sales/update",$(form).serialize()).done(function (data) {
+                    if(data == "success"){
+                        $("#updatemoadl").modal("hide");
+                        dataTable.ajax.reload();
+                    }
+                }).fail(function () {
+                    alert("数据异常!")
+                })
+            }
+        })
     })
 </script>
 </body>
