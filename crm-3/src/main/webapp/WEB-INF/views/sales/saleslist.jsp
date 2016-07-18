@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/dist/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="/static/bootstrap/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/daterangepicker.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -31,7 +32,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">搜索</h3>
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-hand-o-down"></i></button>
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -54,12 +55,11 @@
                             </select>
                         </span>
                         <span class="col-lg-3">
-                            <button type="button" class="btn btn-default pull-left form-control">
-                                <span>
-                                    <i class="fa fa-calendar"></i> 请选择日期
-                                </span>
-                                    <i class="fa fa-caret-down  pull-right"></i>
-                            </button>
+                            <span >
+                                <input type="text" class="form-control" id="model">
+                                <i class='fa fa-calendar'></i> 请选择日期
+                                <i class="fa fa-caret-down  pull-right"></i>
+                            </span>
                         </span>
                         <button class="btn btn-info pull-right"><i class="fa fa-search"></i> 查找</button>
                     </form>
@@ -186,6 +186,8 @@
 <script src="/static/bootstrap/js/jquery.validate.min.js"></script>
 <script src="/static/bootstrap/js/jquery.dataTables.min.js"></script>
 <script src="/static/bootstrap/js/dataTables.bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/moment.js"></script>
+<script src="/static/bootstrap/js/daterangepicker.js"></script>
 <script>
     $(function () {
        var dataTable = $("#salestable").DataTable({
@@ -330,7 +332,16 @@
                     alert("数据异常!")
                 })
             }
-        })
+        });
+        $("#model").daterangepicker({
+            ranges:{"今天":{},
+            "昨天":{},
+            "最近七天":{},
+            "最近三十天":{},
+            "这个月":{},
+            "上个月":{}},
+            autoUpdateInput:true
+        });
     })
 </script>
 </body>

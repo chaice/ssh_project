@@ -6,6 +6,7 @@ com\ccit\controller\DocumentController.class
 com\ccit\mappers\CustomerMapper.class
 com\ccit\pojo\Customer.class
 com\ccit\pojo\Document.class
+com\ccit\mappers\TaskMapper.class
 com\ccit\utils\LoginIp.class
 com\ccit\mappers\SalesFileMapper.class
 com\ccit\mappers\RoleMapper.class
@@ -17,6 +18,7 @@ com\ccit\controller\PreviewController.class
 com\ccit\utils\PinYinUtil.class
 com\ccit\pojo\Notice.class
 com\ccit\mappers\NoticeMapper.class
+com\ccit\service\TaskService.class
 com\ccit\controller\SalesController.class
 com\ccit\pojo\UserLog.class
 com\ccit\mappers\SalesMapper.class
@@ -24,6 +26,7 @@ com\ccit\controller\CustomerController.class
 com\ccit\pojo\User.class
 com\ccit\utils\PinYin.class
 com\ccit\service\UserLogService.class
+com\ccit\controller\TaskController.class
 com\ccit\service\UserService.class
 com\ccit\pojo\Role.class
 com\ccit\pojo\DataTableResult.class
@@ -34,6 +37,7 @@ com\ccit\controller\AdminController.class
 com\ccit\service\SalesFileService.class
 com\ccit\mappers\UserLogMapper.class
 com\ccit\service\SalesService.class
+com\ccit\pojo\Task.class
 com\ccit\service\CustomerService.class
 com\ccit\pojo\SalesLog.class
 com\ccit\pojo\Sales.class

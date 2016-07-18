@@ -6,6 +6,7 @@ import com.ccit.pojo.Sales;
 import com.ccit.pojo.SalesLog;
 import com.ccit.utils.ShiroUtil;
 import org.joda.time.DateTime;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -35,9 +36,13 @@ public class SalesLogService {
     public SalesLog findByContext(String context){
         return salesLogMapper.findByContext(context);
     }
-
+    @Transactional
     public void addlog(Integer salesid ,String context){
         String now = DateTime.now().toString("yyyy-MM-dd HH:mm");
+        Sales sales = salesMapper.findById(salesid,null);
+        sales.setLasttime(now);
+        salesMapper.update(sales);
+
         SalesLog salesLog = new SalesLog();
         salesLog.setContext(context);
         salesLog.setType(SalesLog.TYPE_HAND);
