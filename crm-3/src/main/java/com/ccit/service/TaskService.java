@@ -35,4 +35,8 @@ public class TaskService {
         task.setTitle(title);
         taskMapper.finish(task);
     }
+
+    public List<Task> finished() {
+        return taskMapper.finished();
+    }
 }

@@ -6,6 +6,7 @@ com\ccit\controller\DocumentController.class
 com\ccit\mappers\CustomerMapper.class
 com\ccit\pojo\Customer.class
 com\ccit\pojo\Document.class
+com\ccit\pojo\JSONResult.class
 com\ccit\mappers\TaskMapper.class
 com\ccit\utils\LoginIp.class
 com\ccit\mappers\SalesFileMapper.class
@@ -41,7 +42,7 @@ com\ccit\pojo\Task.class
 com\ccit\service\CustomerService.class
 com\ccit\pojo\SalesLog.class
 com\ccit\pojo\Sales.class
-com\ccit\pojo\SalesFile.class
 com\ccit\utils\ShiroUtil.class
+com\ccit\pojo\SalesFile.class
 com\ccit\mappers\SalesLogMapper.class
 com\ccit\controller\NoticeController.class

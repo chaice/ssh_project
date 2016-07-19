@@ -15,4 +15,6 @@ public interface TaskMapper {
     void deleteTask(Integer id);
 
     void finish(Task task);
+
+    List<Task> finished();
 }
