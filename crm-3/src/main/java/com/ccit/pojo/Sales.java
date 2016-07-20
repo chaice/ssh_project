@@ -7,7 +7,7 @@ public class Sales {
     private Integer id;
     private Integer userid;
     private String name;
-    private String value;
+    private Float value;
     private Timestamp creattime;
     private String progress;
     private String lasttime;
@@ -40,11 +40,11 @@ public class Sales {
         this.name = name;
     }
 
-    public String getValue() {
+    public Float getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Float value) {
         this.value = value;
     }
 

@@ -8,7 +8,11 @@ public class JSONResult<T> {
     public static final String MEG_FAIL = "fail";
     private String message;
     private T data;
-
+    private List<T> list;
+    public JSONResult(List list){
+        this.message = MEG_SUCCESS;
+        this.list = list;
+    }
     public JSONResult(T data){
         this.message = MEG_SUCCESS;
         this.data = data;
@@ -27,5 +31,13 @@ public class JSONResult<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public List<T> getList() {
+        return list;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
     }
 }

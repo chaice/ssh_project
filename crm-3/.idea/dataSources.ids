@@ -234,7 +234,7 @@
       </column>
       <column id="67" parent="7" name="value">
         <comment>价值</comment>
-        <data-type>varchar(45)</data-type>
+        <data-type>float</data-type>
       </column>
       <column id="68" parent="7" name="creattime">
         <data-type>timestamp</data-type>

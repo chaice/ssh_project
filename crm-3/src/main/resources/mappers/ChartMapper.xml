@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccit.mappers.ChartMapper">
+    <select id="getNewAdd" resultType="Long">
+        SELECT COUNT(*) FROM t_customer WHERE
+        date(creattime) >= #{start} and date(creattime) &lt;= #{end}
+    </select>
+    <select id="salesed" resultType="Long">
+        SELECT COUNT(*) FROM t_sales WHERE
+        progress = '交易完成' AND date(completetime) >= #{start} and date(completetime) &lt;= #{end}
+    </select>
+    <select id="sales" resultType="Float">
+        SELECT SUM(value) FROM t_sales WHERE
+        progress = '交易完成' AND date(completetime) >= #{start} and date(completetime) &lt;= #{end}
+    </select>
+    <select id="getUserValue" resultType="Map">
+        SELECT  user.name,(select IFNULL(sum(value),0) FROM t_sales where userid = user.id AND
+        date(completetime) >= #{start} and date(completetime) &lt;= #{end}) as price
+        from (select id,name from t_user) as user
+    </select>
+    <select id="gerProgressCount" resultType="map">
+        SELECT temp.name,(SELECT COUNT(*) FROM t_sales WHERE progress = temp.name
+        AND date(lasttime) >= #{start} and date(lasttime) &lt;= #{end})AS value
+        from
+        (SELECT '交易完成'AS `name`
+        UNION SELECT '初次接触'
+        UNION SELECT '确认意向'
+        UNION SELECT '提供合同'
+        UNION SELECT '交易搁浅'
+        UNION SELECT '交易失败')AS temp
+    </select>
+</mapper>
