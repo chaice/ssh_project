@@ -10,4 +10,10 @@ public class ShiroUtil {
         Subject subject = SecurityUtils.getSubject();
         return (User) subject.getPrincipal();
     }
+    public static boolean isManager(User user){
+        if(user.getRole().getRolename().equals("经理")){
+            return true;
+        }
+        return false;
+    }
 }
