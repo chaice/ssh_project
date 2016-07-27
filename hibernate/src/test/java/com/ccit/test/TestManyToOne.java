@@ -43,7 +43,7 @@ public class TestManyToOne {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
-        Dept dept = (Dept) session.get(Dept.class,15);
+        Dept dept = (Dept) session.get(Dept.class,14);
         Set<Employee> employeeSet = dept.getEmployeeSet();
         for(Employee employee :employeeSet){
             System.out.println(employee.getEmpname());
@@ -73,7 +73,7 @@ public class TestManyToOne {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
-        Dept dept = (Dept) session.get(Dept.class,18);
+        Dept dept = (Dept) session.get(Dept.class,13);
 
         session.delete(dept);
 
