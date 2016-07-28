@@ -1,9 +1,15 @@
 package com.ccit.pojo;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "t_person")
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @OneToOne
     private Card card;
 
     public Integer getId() {

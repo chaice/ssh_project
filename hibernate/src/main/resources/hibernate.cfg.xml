@@ -25,7 +25,9 @@
         <mapping class="com.ccit.pojo.User"/>
         <mapping class="com.ccit.pojo.Dept"/>
         <mapping class="com.ccit.pojo.Employee"/>
-        <mapping resource="hbm/Card.hbm.xml"/>
-        <mapping resource="hbm/Person.hbm.xml"/>
+        <mapping class="com.ccit.pojo.Person"/>
+        <mapping class="com.ccit.pojo.Card"/>
+        <mapping class="com.ccit.pojo.Topic"/>
+        <mapping class="com.ccit.pojo.TopicContent"/>
     </session-factory>
 </hibernate-configuration>
