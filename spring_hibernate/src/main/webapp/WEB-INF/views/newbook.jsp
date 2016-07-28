@@ -8,7 +8,7 @@
 <body>
     <div class="container">
         <h1>新增书籍</h1>
-        <form action="" method="post">
+        <form method="post">
             <div class="form-group">
                 <label class="form-group">书籍名称</label>
                 <input type="text" class="form-control" name="bookname">
@@ -29,7 +29,7 @@
                 <label class="form-group">书籍类型</label>
                 <select name="bookType.id" class="form-control">
                     <c:forEach items="${typelist}" var="type">
-                        <option value="${type}">${type.booktype}</option>
+                        <option value="${type.id}">${type.booktype}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -37,7 +37,7 @@
                 <label class="form-group">出版社</label>
                 <select name="publisher.id" class="form-control">
                     <c:forEach items="${publist}" var="pub">
-                        <option value="${pub}">${pub.pubname}</option>
+                        <option value="${pub.id}">${pub.pubname}</option>
                     </c:forEach>
                 </select>
             </div>

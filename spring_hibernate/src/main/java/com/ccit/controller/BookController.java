@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.inject.Inject;
 
 @Controller
@@ -33,6 +32,18 @@ public class BookController {
     }
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     public String add(Book book){
+        bookService.save(book);
+        return "redirect:/book";
+    }
+    @RequestMapping(value = "/update/{id:\\d+}",method = RequestMethod.GET)
+    public String update(@PathVariable Integer id,Model model){
+        model.addAttribute("typelist",bookService.findAllBookType());
+        model.addAttribute("publist",bookService.findAllPublisher());
+        model.addAttribute("book",bookService.findById(id));
+        return "update";
+    }
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String update(Book book){
         bookService.save(book);
         return "redirect:/book";
     }

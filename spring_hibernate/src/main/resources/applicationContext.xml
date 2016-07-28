@@ -31,7 +31,7 @@
                 <prop key="show_sql">true</prop>
                 <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="cache.use_second_level_cache">true</prop>
-                <prop key="cache.query_cache_factory">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
             </props>
         </property>
     </bean>

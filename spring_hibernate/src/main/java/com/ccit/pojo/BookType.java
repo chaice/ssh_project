@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_booktype")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BookType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

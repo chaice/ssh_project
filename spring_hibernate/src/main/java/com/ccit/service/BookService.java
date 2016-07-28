@@ -40,4 +40,8 @@ public class BookService {
     public void save(Book book) {
         bookDAO.save(book);
     }
+
+    public Book findById(Integer id) {
+        return bookDAO.findOne(id);
+    }
 }
