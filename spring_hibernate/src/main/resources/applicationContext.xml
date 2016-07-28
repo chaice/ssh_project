@@ -10,20 +10,20 @@
 
     <context:property-placeholder location="classpath:config.properties"/>
 
-    <bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.ccit.pojo"/>
         <property name="hibernateProperties">
@@ -31,7 +31,7 @@
                 <prop key="show_sql">true</prop>
                 <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="cache.use_second_level_cache">true</prop>
-                <!--<prop key="cache.query_cache_factory">org.</prop>-->
+                <prop key="cache.query_cache_factory">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
             </props>
         </property>
     </bean>

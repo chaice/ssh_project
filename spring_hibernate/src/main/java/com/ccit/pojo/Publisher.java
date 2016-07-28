@@ -7,13 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_booktype")
+@Table(name = "t_publisher")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class BookType {
+public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String booktype;
+    private String pubname;
 
     public Integer getId() {
         return id;
@@ -23,12 +23,11 @@ public class BookType {
         this.id = id;
     }
 
-    public String getBooktype() {
-        return booktype;
+    public String getPubname() {
+        return pubname;
     }
 
-    public void setBooktype(String booktype) {
-        this.booktype = booktype;
+    public void setPubname(String pubname) {
+        this.pubname = pubname;
     }
 }
-
