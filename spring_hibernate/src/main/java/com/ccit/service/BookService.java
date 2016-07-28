@@ -6,6 +6,8 @@ import com.ccit.dao.PublisherDAO;
 import com.ccit.pojo.Book;
 import com.ccit.pojo.BookType;
 import com.ccit.pojo.Publisher;
+import com.ccit.pojo.SearchParam;
+import com.ccit.utils.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -22,8 +24,8 @@ public class BookService {
     @Inject
     private PublisherDAO publisherDAO;
 
-    public List<Book> findAll(){
-       return bookDAO.findAll();
+    public Page<Book> findAll(List<SearchParam> paramList, Integer p){
+       return bookDAO.findAll(paramList,p);
     }
 
     public void delete(Integer id) {
@@ -44,4 +46,7 @@ public class BookService {
     public Book findById(Integer id) {
         return bookDAO.findOne(id);
     }
+//    public Long getCount(List<SearchParam> paramList){
+//        return bookDAO.getCount(paramList);
+//    }
 }
