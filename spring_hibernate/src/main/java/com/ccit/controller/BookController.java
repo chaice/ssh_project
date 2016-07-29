@@ -26,6 +26,8 @@ public class BookController {
         List<SearchParam> paramList = SearchParam.getParam(request);
         Page<Book> page = bookService.findAll(paramList,p);
         model.addAttribute("page",page);
+        model.addAttribute("typeList",bookService.findAllBookType());
+        model.addAttribute("pubList",bookService.findAllPublisher());
         return "booklist";
     }
     @RequestMapping(value = "/delete/{id:\\d+}",method = RequestMethod.GET)

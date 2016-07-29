@@ -13,9 +13,20 @@
         </div>
         <div class="well well-sm">
             <form action="/book/" class="form-inline" method="get">
-                <input type="text" class="form-control" placeholder="请输入书籍名" name="q_like_bookname">
-                <input type="text" class="form-control" placeholder="请输入最低价格" name="q_ge_bookprice">--
-                <input type="text" class="form-control" placeholder="请输入最高价格" name="q_le_bookprice">
+                <input type="text" class="form-control" placeholder="请输入书籍名或作者" name="q_s_like_bookname_or_bookauthor" value="${q_s_like_bookname_or_bookauthor}">
+                <input type="text" class="form-control" placeholder="请输入最低价格" name="q_f_ge_bookprice" value="${q_f_ge_bookprice}">--<input type="text" class="form-control" placeholder="请输入最高价格" name="q_f_le_bookprice" value="${q_f_le_bookprice}">
+                <select name="q_i_eq_bookType.id" class="form-control">
+                    <option value="">请选择书籍类型</option>
+                    <c:forEach items="${typeList}" var="type">
+                        <option value="${type.id}" ${type.id==q_i_eq_bookType.id?'selected':''}>${type.booktype}</option>
+                    </c:forEach>
+                </select>
+                <select name="q_i_eq_publisher.id" class="form-control">
+                    <option value="">请选择出版社</option>
+                    <c:forEach items="${pubList}" var="pub">
+                        <option value="${pub.id}" ${pub.id==q_i_eq_publisher.id?'selected':''}>${pub.pubname}</option>
+                    </c:forEach>
+                </select>
                 &nbsp;
                 <button class="btn btn-primary" type="submit">搜索</button>
             </form>
@@ -65,8 +76,8 @@
                 prev : '上一页',
                 next: '下一页',
                 last : '末页',
-                href: '?p={{number}}'
-            })
+                href:'?p={{number}}&q_s_like_bookname_or_bookauthor=${q_s_like_bookname_or_bookauthor}&q_f_ge_bookprice=${q_f_ge_bookprice}&q_f_le_bookprice=${q_f_le_bookprice}&q_i_eq_bookType.id=${q_i_eq_bookType.id}&q_i_eq_publisher.id=${q_i_eq_publisher.id}'
+                });
         })
     </script>
 </body>

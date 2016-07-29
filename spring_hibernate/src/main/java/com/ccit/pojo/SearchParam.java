@@ -43,18 +43,27 @@ public class SearchParam {
         List<SearchParam> paramList = Lists.newArrayList();
         while (enumeration.hasMoreElements()){
             String param = (String) enumeration.nextElement();
-            String value = request.getParameter(param);
-            if(param.startsWith("q_")&& StringUtils.isNotEmpty(value)){
-                String[] params = param.split("_");
-                if(params.length != 3){
+            Object value = request.getParameter(param);
+            if(param.startsWith("q_")&& StringUtils.isNotEmpty(value.toString()) && value!=null){
+                String[] params = param.split("_",4);
+                if(params.length != 4){
                     throw new RuntimeException("查询格式错误!");
                 }
-                String type = params[1];
-                String propertyName = params[2];
+                String type = params[2];
+                String propertyName = params[3];
                 SearchParam searchParam = new SearchParam();
                 searchParam.setType(type);
                 searchParam.setPropertyName(propertyName);
-                searchParam.setValue(Strings.toUTF8(value));
+                String valueType = params[1];
+                if("s".equals(valueType)){
+                    value = Strings.toUTF8(value.toString());
+                }else if("f".equals(valueType)){
+                    value = Float.valueOf(value.toString());
+                }else  if("i".equals(valueType)){
+                    value = Integer.valueOf(value.toString());
+                }
+                request.setAttribute(param,value);
+                searchParam.setValue(value);
                 paramList.add(searchParam);
             }
         }
