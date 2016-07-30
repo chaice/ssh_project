@@ -1,11 +1,13 @@
 package com.ccit.dao;
 
 
+import com.ccit.utils.Page;
 import com.ccit.utils.QueryParam;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
+import org.hibernate.criterion.*;
+import org.hibernate.transform.ResultTransformer;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -46,16 +48,59 @@ public class BaseDAO<T,pk extends Serializable> {
         getSession().saveOrUpdate(entity);
     }
 
-    public void findAll(List<QueryParam> paramList,Integer p){
+    public Page<T> findAll(List<QueryParam> paramList, Integer p){
         Criteria criteria = getSession().createCriteria(aClass);
         for(QueryParam param : paramList){
             String type = param.getType();
             String propertyName = param.getPropertyName();
             Object value = param.getValue();
+
+            if(propertyName.contains("_or_")){
+                String[] paramnames = propertyName.split("_or_");
+                Disjunction disjunction = Restrictions.disjunction();
+                for(String name :paramnames){
+                    disjunction.add(Restrictions.like(name, (String) value, MatchMode.ANYWHERE));
+                }
+                criteria.add(disjunction);
+            }else{
+               Criterion criterion = bulitRestrictions(type, propertyName, value);
+                criteria.add(criterion);
+            }
         }
+        Integer count = getCount(criteria).intValue();
+        Page<T> page = new Page<T>(p,count,10);
+
+        criteria.setFirstResult(page.getPageNum());
+        criteria.setMaxResults(page.getSize());
+
+        List<T> items = criteria.list();
+
+        page.setItems(items);
+
+        return page;
     }
 
-    public Long getCount(){
+    private Criterion bulitRestrictions(String type, String propertyName, Object value) {
+        if("eq".equals(type)){
+            return Restrictions.eq(propertyName,value);
+        }else if("like".equals(type)){
+            return Restrictions.like(propertyName,value.toString(), MatchMode.ANYWHERE);
+        }else if("ge".equals(type)){
+            return Restrictions.ge(propertyName,value);
+        } else if("le".equals(type)){
+            return Restrictions.le(propertyName,value);
+        }
+        return null;
+    }
 
+    public Long getCount(Criteria criteria){
+        ResultTransformer resultTransformer = criteria.ROOT_ENTITY;
+        criteria.setProjection(Projections.rowCount());
+
+        Long count = (Long) criteria.uniqueResult();
+        criteria.setProjection(null);
+        criteria.setResultTransformer(resultTransformer);
+
+        return count;
     }
 }
