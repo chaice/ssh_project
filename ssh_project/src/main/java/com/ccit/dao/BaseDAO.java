@@ -1,6 +1,7 @@
 package com.ccit.dao;
 
 
+import com.ccit.utils.QueryParam;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,5 +44,18 @@ public class BaseDAO<T,pk extends Serializable> {
 
     public void saveOrUpdate(T entity){
         getSession().saveOrUpdate(entity);
+    }
+
+    public void findAll(List<QueryParam> paramList,Integer p){
+        Criteria criteria = getSession().createCriteria(aClass);
+        for(QueryParam param : paramList){
+            String type = param.getType();
+            String propertyName = param.getPropertyName();
+            Object value = param.getValue();
+        }
+    }
+
+    public Long getCount(){
+
     }
 }
