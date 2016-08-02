@@ -70,8 +70,9 @@ public class BaseDAO<T,pk extends Serializable> {
         Integer count = getCount(criteria).intValue();
         Page<T> page = new Page<T>(p,count,10);
 
-        criteria.setFirstResult(page.getPageNum());
+        criteria.setFirstResult(page.getStart());
         criteria.setMaxResults(page.getSize());
+        criteria.addOrder(Order.desc("id"));
 
         List<T> items = criteria.list();
 
@@ -102,5 +103,9 @@ public class BaseDAO<T,pk extends Serializable> {
         criteria.setResultTransformer(resultTransformer);
 
         return count;
+    }
+
+    public void delete(T entity) {
+        getSession().delete(entity);
     }
 }

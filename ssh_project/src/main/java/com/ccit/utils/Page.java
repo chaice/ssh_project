@@ -18,10 +18,12 @@ public class Page<T> {
      * @param size  每页显示多少个
      */
     public Page(Integer p , Integer count , Integer size ){
-        this.totalPage = count/start;
+        this.totalPage = count/size;
         this.size = size;
 
-        if(count%start != 0){
+        this.pageNum = p;
+
+        if(count%size != 0){
             this.totalPage ++;
         }
         if(p <= 0){

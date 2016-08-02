@@ -3,14 +3,15 @@ package com.ccit.controller;
 import com.ccit.pojo.Ill;
 import com.ccit.service.IllService;
 import com.ccit.service.UserService;
+import com.ccit.utils.Page;
+import com.ccit.utils.QueryParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/ill")
@@ -21,9 +22,12 @@ public class IllController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String ill(Model model){
+    public String ill(Model model, HttpServletRequest request,
+                      @RequestParam(required = false,defaultValue = "1")Integer p){
+        List<QueryParam> queryParamList = QueryParam.getParam(request);
+        Page<Ill> page = illService.findAll(queryParamList,p);
         model.addAttribute("officeList",userService.findAllOffice());
-        model.addAttribute("illList",illService.findAll());
+        model.addAttribute("page",page);
         return "ill/ill";
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)

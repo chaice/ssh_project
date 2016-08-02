@@ -10,12 +10,12 @@
 
 
     <div class="well well-sm container">
-            <form class="form-inline">
-                <input type="text" class="form-control" placeholder="请输入疾病名称" name="q_s_like_illname">
+            <form class="form-inline" method="get">
+                <input type="text" class="form-control" placeholder="请输入疾病名称" name="q_s_like_illname" value="${q_s_like_illname}">
                 <select name="q_i_eq_office.id" id="" class="form-control">
                     <option value="">请选择科室</option>
                     <c:forEach items="${officeList}" var="office">
-                        <option value="${office.id}">${office.officename}</option>
+                        <option value="${office.id}" ${office.id==q_i_eq_office.id?'selected':''}>${office.officename}</option>
                     </c:forEach>
                 </select>
                 <button class="btn btn-primary pull-right" type="submit"><i class="fa"></i> 搜索</button>
@@ -37,7 +37,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${illList}" var="ill">
+                <c:forEach items="${page.items}" var="ill">
                     <tr class="active">
                         <td>${ill.illname}</td>
                         <td>${ill.office.officename}</td>
@@ -50,6 +50,7 @@
                 </tbody>
             </table>
         </div>
+       <div id="page" class="pull-right"></div>
     </div>
 
     <div class="modal fade" id="add_modal">
@@ -109,8 +110,19 @@
 
     <script src="/static/js/jquery-3.0.0.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery.twbsPagination.min.js"></script>
     <script>
         $(function () {
+            $("#page").twbsPagination({
+                totalPages: ${page.totalPage},
+                visiblePages: 5,
+                first : '首页',
+                prev : '上一页',
+                next: '下一页',
+                last : '末页',
+                href:'?p={{number}}&q_s_like_illname=${q_s_like_illname}$q_i_eq_office.id=${q_i_eq_office.id}'
+            })
+
             $("#add_ill").click(function () {
                 $("#add_form")[0].reset();
                 $("#add_modal").modal({

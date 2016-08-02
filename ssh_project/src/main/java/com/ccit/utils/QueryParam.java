@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.List;
 
-/**
- * Created by cc on 2016/7/29.
- */
 public class QueryParam {
     private String type;
     private String propertyName;
@@ -39,10 +36,10 @@ public class QueryParam {
         this.value = value;
     }
 
-    public List<QueryParam> getParam(HttpServletRequest request){
+    public static List<QueryParam> getParam(HttpServletRequest request){
         Enumeration enumation = request.getParameterNames();
         List<QueryParam> paramList = Lists.newArrayList();
-        if(enumation.hasMoreElements()){
+       while(enumation.hasMoreElements()){
             String params = (String) enumation.nextElement();
             Object value = request.getParameter(params);
             if(params.startsWith("q_") && value != null && StringUtils.isNotEmpty(value.toString())){
@@ -60,6 +57,7 @@ public class QueryParam {
                 }
 
                 request.setAttribute(params,value);
+
                 QueryParam queryParam = new QueryParam();
                 queryParam.setValue(value);
                 queryParam.setPropertyName(propertyName);

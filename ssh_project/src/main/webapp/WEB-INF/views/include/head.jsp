@@ -12,8 +12,8 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="${param.menu == 'home'?'active':''}"><a href="/"><i class="fa fa-home"></i> 主页</a></li>
-                <li><a href="#"><i class="fa fa-user-md"></i> 病人档案</a></li>
-                <li><a href="#"><i class="fa fa-stethoscope"></i> 就诊记录</a></li>
+                <li class="${param.menu == 'patient'?'active':''}"><a href="/patient"><i class="fa fa-user-md"></i> 病人档案</a></li>
+                <li class="${param.menu == 'record'?'active':''}"><a href="/record"><i class="fa fa-stethoscope"></i> 就诊记录</a></li>
                 <li><a href="#"><i class="fa fa-bell"></i> 复诊提醒</a></li>
                 <li><a href="#"><i class="fa fa-bar-chart"></i> 数据统计</a></li>
                 <li class="dropdown ${param.menu == 'setting'?'active':''}">
@@ -21,7 +21,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/office"><i class="fa fa-h-square"></i> 科室设置</a></li>
                         <li><a href="/ill"><i class="fa fa-plus-square"></i> 病种设置</a></li>
-                        <li><a href="#"><i class="fa fa-navicon"></i> 医保类型设置</a></li>
+                        <li><a href="/insurance"><i class="fa fa-navicon"></i> 医保类型设置</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/user"><i class="fa fa-edit"></i> 账号设置</a></li>
                     </ul>
