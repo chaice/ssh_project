@@ -4,6 +4,8 @@ import com.ccit.dao.FileDAO;
 import com.ccit.dao.RecordDAO;
 import com.ccit.pojo.File;
 import com.ccit.pojo.Record;
+import com.ccit.utils.Page;
+import com.ccit.utils.QueryParam;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,5 +59,9 @@ public class RecordService {
 
     public List<Record> findByPatientId(Integer id) {
        return recordDAO.findByPatientId(id);
+    }
+
+    public Page<Record> findAll(List<QueryParam> queryList, Integer p) {
+        return recordDAO.findAll(queryList,p);
     }
 }

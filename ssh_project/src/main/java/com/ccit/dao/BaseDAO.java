@@ -26,7 +26,7 @@ public class BaseDAO<T,pk extends Serializable> {
         aClass = (Class<?>) type.getActualTypeArguments()[0];
     }
 
-    private Session getSession(){
+    public Session getSession(){
         return  sessionFactory.getCurrentSession();
     }
 
@@ -50,6 +50,13 @@ public class BaseDAO<T,pk extends Serializable> {
 
     public Page<T> findAll(List<QueryParam> paramList, Integer p){
         Criteria criteria = getSession().createCriteria(aClass);
+        return getPage(paramList, p, criteria);
+    }
+    public Page<T> findAll(Criteria criteria,List<QueryParam> paramList, Integer p){
+        return getPage(paramList, p, criteria);
+    }
+
+    private Page<T> getPage(List<QueryParam> paramList, Integer p, Criteria criteria) {
         for(QueryParam param : paramList){
             String type = param.getType();
             String propertyName = param.getPropertyName();

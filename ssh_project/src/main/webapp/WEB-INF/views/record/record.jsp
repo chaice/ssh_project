@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>就诊记录</title>
+    <title>新增就诊记录</title>
     <link rel="stylesheet" href="/static/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/simditor/styles/simditor.css">
     <link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css">

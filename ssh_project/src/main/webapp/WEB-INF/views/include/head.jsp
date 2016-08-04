@@ -13,9 +13,9 @@
             <ul class="nav navbar-nav">
                 <li class="${param.menu == 'home'?'active':''}"><a href="/"><i class="fa fa-home"></i> 主页</a></li>
                 <li class="${param.menu == 'patient'?'active':''}"><a href="/patient"><i class="fa fa-user-md"></i> 病人档案</a></li>
-                <li class="${param.menu == 'record'?'active':''}"><a href="/record"><i class="fa fa-stethoscope"></i> 就诊记录</a></li>
-                <li><a href="#"><i class="fa fa-bell"></i> 复诊提醒</a></li>
-                <li><a href="#"><i class="fa fa-bar-chart"></i> 数据统计</a></li>
+                <li class="${param.menu == 'record'?'active':''}"><a href="/record/list"><i class="fa fa-stethoscope"></i> 就诊记录</a></li>
+                <li class="${param.menu == 'remind'?'active':''}"><a href="/remind"><i class="fa fa-bell"></i> 复诊提醒</a></li>
+                <li class="${param.menu == 'data'?'active':''}"><a href="/data"><i class="fa fa-bar-chart"></i> 数据统计</a></li>
                 <li class="dropdown ${param.menu == 'setting'?'active':''}">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs"></i> 系统设置 <span class="caret"></span></a>
                     <ul class="dropdown-menu">

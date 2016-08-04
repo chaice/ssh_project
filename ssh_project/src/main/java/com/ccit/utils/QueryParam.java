@@ -2,8 +2,13 @@ package com.ccit.utils;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -54,6 +59,13 @@ public class QueryParam {
                     value = Integer.valueOf(value.toString());
                 }else if("f".equals(valueType)){
                     value = Float.valueOf(value.toString());
+                }else if("d".equals(valueType)){
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        value = dateFormat.parse(value.toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 request.setAttribute(params,value);

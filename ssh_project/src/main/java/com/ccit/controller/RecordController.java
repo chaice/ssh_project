@@ -6,15 +6,14 @@ import com.ccit.service.IllService;
 import com.ccit.service.PatientService;
 import com.ccit.service.RecordService;
 import com.ccit.service.UserService;
+import com.ccit.utils.QueryParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -28,6 +27,12 @@ public class RecordController {
     private IllService illService;
     @Inject
     private RecordService recordService;
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public String recordList(@RequestParam(required = false,defaultValue = "1")Integer p, HttpServletRequest request, Model model){
+        List<QueryParam> queryList = QueryParam.getParam(request);
+        model.addAttribute("page", recordService.findAll(queryList,p));
+        return "record/recordlist";
+    }
     @RequestMapping(method = RequestMethod.GET)
     public String record(Model model){
         model.addAttribute("officeList",userService.findAllOffice());
@@ -43,7 +48,7 @@ public class RecordController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(Record record){
         recordService.add(record);
-        return "redirect:/record";
+        return "redirect:/record/list";
     }
     @ResponseBody
     @RequestMapping(value = "/addfile",method = RequestMethod.POST)
