@@ -26,3 +26,25 @@ bean的解析过程非常复杂,功能被分的很细,要扩展的地方很多,�
 
 Context 组件 ,实际上是给spring提供一个运行时环境,用来保存各个对象的状态.
 ApplicationContext 是context的顶级父类,除了能标识一个应用环境的基本信息外,还继承了五个接口,这五个接口主要是扩展了Context的功能.
+ResourcePatternResolver,ApplicationEventPublisher,ListableBeanFactory,HiberarchicalBeanFactory,MessageSource
+ApplicationContext继承了BeanFactory,说明了spring容器中运行主体对象是bean.还继承了ResourceLoader接口,使得ApplicationContext可以访问到任何的外部资源.
+ApplicationContext的子类主要包括
+1.ConfigurableApplicationContext 表示Context是可修改的,用户可以动态的添加或修改已有的配置信息.它下面还有多个子类,最常用的是
+AbstractRefreshableApplicationContext.
+2.WebApplicationContext 为web准备的,可以直接访问到servletContext
+总体来说,applicationContext必须要完成以下几件事:
+1.标识一个应用环境;2.利用BeanFactory创建bean对象;3.保存对象关系表;4.能够捕获各种事件
+Context把资源的加载,解析和描述工作委托给了ResourcePatternResolver类完成,把资源的加载,解析和资源的定义整合在一起.
+
+Core组件
+作为核心组件,其中一个重要组成部分是定义了资源的访问方式.
+Resource 接口封装了各种可能的资源类型,对使用者屏蔽了各种可能的文件类型.
+继承了InputStreamSource接口,这个接口中有个getInputStream方法,返回的是InputStream类,这样所有的资源都可以通过InputStream这个类来截取.
+加载资源,资源的加载者要统一,这个任务是由ResourceLoader接口完成,只要实现这个接口就可以加载所有的资源,,默认实现类是DefaultResourceLoader.
+
+ioc容器实际上是context组件结合其他两个组件共同构建了一个关系网,构建的入口在AbstractApplicationContext类的refresh方法中.
+在refresh方法中主要包括:
+1.构建BeanFactory,以便产生bean
+2.注册可能感兴趣的事件
+3.创建bean实例对象
+4.触发被监听的事件.
