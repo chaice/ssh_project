@@ -1,3 +1,6 @@
+#哑表(dual)
+单行单列的虚拟表,oracle内部逻辑保证表中永远只有一条数据,常用在没有目标表的select语句块中
+
 #oracle 函数
 abs();返回绝对值
 sign();正值返回1,负值返回-1,0返回0
@@ -25,3 +28,63 @@ substr(c,n1[,n2]);返回从n1开始截取n2个字符,如果没n2则从n1开始�
 translate(c1,c2,c3);将字符串中指定的字符替换为新字符.如果c3长度大于c2,则c3长出的字符无效;c3长度小于c2,则c2长出的字符替换为空.c2中有重复字符,
 则按第一次出现位置为替换依据.
 trim(c1 from c2);删除c2左边右边出现的c1字符串
+sysdate 返回当前时间
+add_month(d,n);返回时间d加上n个月后的时间
+last_day(d);返回日期所在月份最后一天的时间
+month_between(d1,d2);返回两个日期之间相差的月份
+round(d[,c]);
+*********参数c***********
+无或者j:返回距d最近的0点日期
+day或dy或d:返回距d最近的星期日
+month或mon或mm或rm:返回最近的月初日期
+q:返回最近的季日期
+year或syear或yyyy或yyy或yy或y:返回最近的年初日期
+scc或cc:返回最近的世纪初日期
+*************************
+trunc(d[,c]);返回日期所在期间的第一天
+next_day(d[,c]);返回日期在下周星期几的日期
+extract(c from d);提取时间日期中的数据,c 字符型 d 日期型(date)/日期时间型(timestamp) 
+--------参数c-------------
+second/minute/hour/day/month/year
+--------------------------
+localtimestamp; 返回会话中的时间
+current_timestamp; 返回当前会话时区中的时间
+current_date;返回当前会话时区中的日期
+interval d set1;变动时间数值.d为数字字符串或日期时间字符串,set1为日期参数   eg:sysdate-(interval '1' hour)
+convert(c,set1,set2);将字符串c从语言字符集set2转化为set1
+to_char(c);//把日期或数字转化为字符串
+to_date(c);//把字符串转化为数据库中的时间类型
+to_number(c);c必须能转化为数字
+avg();返回某列的平均值
+sum();返回某列的和
+count();返回不为空的行数   *表示对满足条件的所有行统计,不管是否重复或有空值(null)
+max();返回最大值
+min();返回最小值
+stddev(c);统计某列的误差
+variance(c);统计某列的方差
+geratest(n1,n2...n);返回参数列表中值最大的一个,如果类型不同,则会隐含的转化为第一个参数的类型
+least(n1,n2...n);返回参数列表中值最小的一个
+nvl(expr1,expr2);1不为空,则返回1;1为空,返回2
+nvl2(expr1,expr2,expr3);1为空,返回3;1不为空,返回2
+decode(条件,值1,返1,值2,返2);根据条件返回值.条件=值1,返回1
+nullif(expr1,expr2);相等返回null,不等返回expr1
+coalesce(c1,c2...cn);返回列表中第一个非空的表达式,全部为空,则返回一个空值
+rownum;返回当前行号
+sys_guid();产生32位的随机数
+dbms.random;生成随机数值或者字符串,返回一个具有38位精度的数值.eg:dbms.random.value*100;dbms.random.value(1,101);
+row_number() over(partition by col1 order by col2);根据col1分组,在分组内部根据col2进行排序
+rand() over();
+dense_rank() over();//计算一组数值中的排序值
+
+#存储过程
+create or replace procedure <过程名>(参数名) is  //参数的类型 in 默认类型,表示输入;out 表示输出
+ <局部变量声明>
+ begin
+    可执行语句
+ exception
+    异常处理语句
+ end
+ 在pl/sql块中直接使用过程名,在程序外使用execute <过程名>(参数)
+ 删除存储过程 drop procedure <过程名>
+ 查看过程状态 select * from user_objects where object_type='procedure'
+ 查看过程代码 select * from user_source where type='procedure'
