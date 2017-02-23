@@ -1,0 +1,17 @@
+# JSONObject 一个无序的键值对集合,表现形式是一个包裹在花括号中的字符串,键值之间用逗号隔开
+JSONObject jsonObject = new JSONObject();//构造函数中可传的参数类型常用的有String,map,object.
+可以使用put方法向json对象中添加key/value对,当用put方法时候,value值可以是int,double,string,boolean,collection,map等,不能是object.
+使用put(String key);通过键来获取值.json对象中有很多个opt***();如果json中有这个属性,则返回,否则返回一个默认值.
+
+# JSONArray 是一个有序的序列值
+JSONArray jsonArray = new JSONArray();
+for(int i = 0;i<jsonArray.length();i++){
+  jsonArray.getJSONObject(i);//返回JSONObject
+}
+
+#JSONStringer && JSONWriter 可以用来构建一个JSON格式的文本,并转换成String,可以写入文件,便于传输和存储
+PrintWriter pw = new PrintWriter("文件名");
+JSONWriter jsonWriter = new JSONWriter(Write w);
+JSONStringer 的用法与JSONWriter几乎一样,不需要给构造函数传参.JSONStringer jsonStringer = new JSONStringer();
+
+#JSONTokener 读取包含json格式数据的文件,之后可以将jsonTokener对象作为参数来构造JSONObject或JSONArray
