@@ -13,6 +13,40 @@
   ①.string  redis最基本的类型,一个key对应一个value,二进制安全的,可以包含任何数据,比如jpg图片或序列化的对象,一个键最大能存储512MB
   使用set key value--------get key
   ②.hash 是一个键值对集合,是一个string类型的field和value的映射表,适合用于存储对象.每个hash可以存储2^32-1键值对
-  HMSET user:1 username tom password 123456 points 200
-  HGETALL user:1
-  ③.list 简单的字符串列表,按照插入
+  HMSET key_name key value [key value ...] 为一个或多个键设置值
+  HMGET ket_name key [key...] 获取一个或多个键的值
+  HDEL key_name key [key...] 删除一个或多个键值对,并返回成功找到并删除的键值对个数
+  HLEN key_name 返回包含的键值对数量
+  HEXISTS key_name 检查给定键是否存在
+  HKEYS key_name 获取包含的所有键
+  HVALS key_name 获取包含的所有值
+  HGETALL key_name 获取包含的所有键值对
+  HINCRBY key_name key increment 将key保存的值加上整数inrement
+  HINCRBYFLOAT key_name key increment 将key保存的值加上浮点数increment
+  ③.list 简单的字符串列表,按照插入顺序排序,可以添加一个元素到列表的左边或右边,最多可存储2^32-1个元素
+  rpush key_name value [value...] 将一个或多个值推入到列表的右端
+  lpush key_name value [value...] 将一个或多个值推入到列表的左端
+  rpop key_name 移除并返回列表最右端的元素
+  lpop key_name 移除并返回列表最左端的元素
+  lindex key_name offset 返回列表中偏移量为offset的元素
+  lrange key_name start end 返回列表从start到end范围内的所有元素,包括start和end
+  ltrim key_name start end 只保留从start到end范围内的所有元素,包括start和end
+  ④.set 以无序的形式来存储多个不相同的元素,用户可以快速地对集合执行添加元素,移除元素以及检查一个元素是否存在于集合里的操作.*元素不会重复
+  sadd key_name item [item...] 将一个或多个元素添加到集合中去,并返回被添加元素当中原来并不存在于集合里面的元素数量
+  srem key_name item [item...] 从集合里面移除一个或多个元素,并返回被移除元素的数量
+  sismember key_name item 检查元素item是否存在于集合中
+  scard key_name 返回集合包含的元素数量
+  smembers key_name 返回集合包含的所有元素
+  srandmember key_name [count] 从集合中随机地返回一个或多个元素.当count为正数时,命令返回的随机元素不会重复;当count为负数时,命令返回的元素可能会出现重复.
+  spop key_name 从集合中移除并返回一个随机元素
+  ⑤.zset 有序集合 存储着成员与分值之间的映射 每个元素会关联一个double类型的分数,通过分数来对集合中的成员进行从小到大的排序,member是唯一的,score可以不唯一
+  zadd key_name score member 将带有给定分值的成员添加到有序集合里面
+  zrem key_name member 从有序集合里面移除给定的成员,并返回被移除成员的数量
+  zcard key_name 返回有序集合包含的成员数量
+  zincrby key_name increment member 将member成员的分值加上increment
+  zcount key_name min max 返回分值介于min和max之间的成员数量
+  zrank key_name member 返回member在集合中的排名
+  zscore key_name member 返回member的分值
+  zrange key_name start stop
+  
+  
