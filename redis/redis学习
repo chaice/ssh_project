@@ -1,0 +1,18 @@
+1.安装redis
+  ①.windows下安装redis
+  下载地址:https://github.com/MSOpenTech/redis/releases.下载完成后,解压.
+  cd 到解压后的文件,执行redis-server.exe redis.windows.conf,即可启动
+  ②.linux下安装
+  下载,解压,编译
+  wget http://download.redis.io/releases/redis-3.2.8.tar.gz
+  tar xzf redis-3.2.8
+  cd redis-3.2.8
+  make
+  二进制文件是在编译完成后在src目录下,通过redis-server命令来启动redis服务,通过redis-cli进行使用
+2.redis数据类型 支持五种数据类型 string(字符串),hash(哈希),list(列表),set(集合),zset(sorted set:有序集合)
+  ①.string  redis最基本的类型,一个key对应一个value,二进制安全的,可以包含任何数据,比如jpg图片或序列化的对象,一个键最大能存储512MB
+  使用set key value--------get key
+  ②.hash 是一个键值对集合,是一个string类型的field和value的映射表,适合用于存储对象.每个hash可以存储2^32-1键值对
+  HMSET user:1 username tom password 123456 points 200
+  HGETALL user:1
+  ③.list 简单的字符串列表,按照插入
