@@ -1,4 +1,5 @@
 #redis.conf配置说明
+redis 使用密码登录 redis-cli -h url -p 6379 -a 密码
 1.redis默认不是以守护进程的方式运行,可以通过该配置项修改,使用yes启用守护进程. daemonize no
 2.当redis以守护进程方式运行时,redis会默认把pid写入/var/run/redis.pid文件,可以通过pidfile指定 pidfile /var/run/redis.pid
 3.指定redis监听端口,默认端口为6379,6379在手机按键上对应merz. port 6379
