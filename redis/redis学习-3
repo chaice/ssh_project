@@ -1,0 +1,13 @@
+#spring-data-redis 提供了多种serializer策略.
+JdkSerializtionRedisSerializer:使用jdk的序列化手段(serializer接口,objectoutputstream,objectinputstream),数据以字节流存储.最基础的序列化策略
+StringRedisSerializer:字符串编码,数据以string存储
+JacksonJsonRedisSerializer:json格式存储
+OxmSerializer:xml格式存储
+
+RedisTemplate中需要声明四种serializer,默认为JdkSerializtionRedisSerializer
+keySerializer:对于普通K-V操作,key采取的序列化策略
+valueSerializer:value采取的序列化策略
+hashKeySerializer:在hash数据结构中,hash-key的序列化策略
+hashValueSerializer:hash-value的序列化策略
+
+无论如何,key/hashKey采用stringRedisSerializer
