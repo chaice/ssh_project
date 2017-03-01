@@ -1,0 +1,7 @@
+#mysql 中#和$
+# 解析为一个jdbc预编译语句(prepared statement)的参数标记符 表示一个参数 
+$ 表示一个字符串 为原样输出.一个纯粹的string替换,在sql解析阶段会进行变量替换
+使用#{parameter},mybatis会把这个参数认为是一个字符串,eg:传入参数是"Smith",在sql使用时会转化为name = 'Smith'
+使用${parameter},会转化为name = Smith
+#{}经过预编译是安全的,${}没有经过预编译,不安全存在sql注入
+只能使用${}的情况,order by ,limit,使用#{}会加上''而导致sql语句失效,动态拼接sql也要用${} 
