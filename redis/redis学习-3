@@ -11,3 +11,6 @@ hashKeySerializer:在hash数据结构中,hash-key的序列化策略
 hashValueSerializer:hash-value的序列化策略
 
 无论如何,key/hashKey采用stringRedisSerializer
+
+#redis主从复制 
+在slave下,修改redis.conf,设置slaveof <masterip> <masterport>.如果master有密码, masterauth <master-password>
