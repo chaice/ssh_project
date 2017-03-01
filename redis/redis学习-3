@@ -14,3 +14,6 @@ hashValueSerializer:hash-value的序列化策略
 
 #redis主从复制 
 在slave下,修改redis.conf,设置slaveof <masterip> <masterport>.如果master有密码, masterauth <master-password>
+
+DefaultAdvisorAutoProxyCreator
+spring提供的自动代理建立,只要applicationContext中包括,在bean被读取完之后,会自动搜寻所有的advisor,并自动将advisor应用至符合pointcuts的目标上.
