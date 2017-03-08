@@ -7,6 +7,19 @@ hibernate由三个不同的组件组成:
 hibernate查询语言:使用hibernate时,发送到数据库的查询,不必是原生的sql格式,而是使用hibernate专有的查询语言.这些查询语句,会在运行时被翻译成当前应用
 正在使用的数据库对应方言.
 
+#hibernate主键生成策略
+1.increment 用于为long,int,short类型生成唯一标识.只有在没有其他进程同往一张表中插入数据才能使用.在集群下不要使用.
+2.identity 对db2,mysql,sql server,sybase,和hypersonicsql的内置标识字符提供支持.返回的标识字符是long,short,int类型的.
+3.sequence 在db2,postgresql,oracle,sap db,mckoi中使用序列(sequence),而在interbase中使用生成器generator.返回的标识符是long,short,int.
+4.hilo 使用一个高低位算法快速生成的long,short,或者int类型的标识符,给定一个表和字段作为高位值的来源,生成的标识符在一个特定的数据库中是唯一的.
+5.seqhilo 使用高低位算法生成long,short,int类型的标识符,给定一个数据列(sequence)的名字.
+6.uuid 用一个128bit的uuid算法生成字符串类型的标识符,这在一个网络中是唯一的.uuid被编码为一个32位16进制数字的字符串.
+7.guid 在sqlserver和mysql中使用数据库生成的guid字符串
+8.native 根据底层数据库的能力选择identity,sequence或hilo中的一个
+9.assigned 让应用程序在调用save()之前为对象分配一个标识符,这是genernate中没有指定时的默认生成策略
+10.select  通过数据库触发器选择一些唯一主键的行并返回主键值来分配一个主键
+11.foreign 使用另外一个相关联的对象的标识符.通常和one-to-one联合使用
+
 hibernate的session用于获取与数据库的物理连接.session对象是轻量级的,并且设计为在每次需要与数据库进行交互时被实例化.持久态对象被保存,并通过session对象
 检索找回.
 #基于主键关联的单向一对一关联通常使用一个特定的id生成器
