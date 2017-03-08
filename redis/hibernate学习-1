@@ -9,6 +9,20 @@ hibernate查询语言:使用hibernate时,发送到数据库的查询,不必是�
 
 hibernate的session用于获取与数据库的物理连接.session对象是轻量级的,并且设计为在每次需要与数据库进行交互时被实例化.持久态对象被保存,并通过session对象
 检索找回.
-
-#many-to-one 
-多对一:可以定义一种常见的与另一个持久化类的关联,这种关系模型是多对一关联
+#基于主键关联的单向一对一关联通常使用一个特定的id生成器
+<id name="" column="">
+  <generator class="foreign">
+    <param name="property">person</param>
+  </generatore>
+</id>
+<one-to-one name="person" constrained="true"></one-to-one>
+#基于连接表的单向一对多关联.通过指定unique="true",可以把多样性从多对多变为一对多
+<set name="" table="">
+   <key column=""/>
+   <many-to-many column="" unique="" class=""></many-to-many>
+</set>
+#基于连接表的单向多对一关联
+<join table="" optional="">
+  <key column="" unique=""/>
+  <many-to-one name="" column="" not-null=""></many-to-one>
+</join>
