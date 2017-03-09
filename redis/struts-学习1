@@ -1,0 +1,28 @@
+#struts
+在web.xml中配置filter
+<!--负责整个struts,并且处理所有请求-->
+<filter>
+  <filter-name>struts</filter-name>
+  <filter-class>org.apache.struts2.dispatcher.filter.StrutsPerpareAndExecuteFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>struts</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+#流程
+当请求提交时,首先会被web.xml中配置的过滤器监听到,过滤器会查找struts.xml,并结合namespace查找为请求名的action,查找到action会便交给其处理,action的内部
+会执行execute方法,并返回结果result,根据result再到页面.
+#struts2自带的开发模式常量
+<constant name="struts.i18n.encoding" value="utf-8"/>//指定web应用的编码集,相当于调用HttpServletRequest.setCharacterEncoding方法,如果使用了
+velocity或freemarker,它也用于指定输出的编码格式
+<constant name="struts.action.extension" value="action,do"/>//指定请求后缀为.action或.do,多个请求后缀用逗号隔开
+<constant name="struts.serve.static.browserCache" value=""/>//设置浏览器是否缓存静态内容
+<constant name="struts.configuration.xml.reload" value=""/>//当struts.xml配置文件修改后,是否重新加载该文件
+<constant name="struts.devMode" value=""/>//出错时打印更详细的信息
+#package配置相关
+name package的唯一标识,不允许同名
+extends 指定要继承的包
+namespace 指定名称空间
+abstract 声明包为抽象否
+通常情况下,action的name属性值是不能出现/的,所有希望通过action中name属性来实现多级映射,需要在struts.xml中增加
+<constant name="struts.enable.SlashesInActionNames" value="true"/>
