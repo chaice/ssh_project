@@ -39,3 +39,17 @@ hibernate的session用于获取与数据库的物理连接.session对象是轻�
   <key column="" unique=""/>
   <many-to-one name="" column="" not-null=""></many-to-one>
 </join>
+
+#hibernate 条件查询
+1.创建Criterid实例
+Criteria criteria = session.createCriteria(Class class);
+2.限制结果内容
+Restrictions
+like(String propertyName,Object value) ==propertyName like '%vale%';
+between(String propertyName,Object lo,Object hi) ==property between lo and hi;
+in(String propertyName,Collection values) ==propertyName in(values);
+or();
+isNull(String propertyName);
+eq(String propertyName,Object value) ==property = value;
+排序:Order.asc(String propertyName);Order.desc(String propertyName);
+直接使用sql,Restrictions.sqlRestriction();
