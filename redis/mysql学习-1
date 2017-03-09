@@ -1,3 +1,7 @@
+#left join,right join,inner join
+left join:返回左表中的所有记录和右表中联结字段相等的记录
+right join:返回右表中的所有记录和左表中联结字段相等的记录
+inner join:只返回两表中连接字段相等的值.
 #mysql 中#和$
 # 解析为一个jdbc预编译语句(prepared statement)的参数标记符 表示一个参数 
 $ 表示一个字符串 为原样输出.一个纯粹的string替换,在sql解析阶段会进行变量替换
