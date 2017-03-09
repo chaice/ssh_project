@@ -53,3 +53,11 @@ isNull(String propertyName);
 eq(String propertyName,Object value) ==property = value;
 排序:Order.asc(String propertyName);Order.desc(String propertyName);
 直接使用sql,Restrictions.sqlRestriction();
+
+#hibernate抓取策略
+1.连接抓取(join):hibernate通过select语句使用outer join(外连接)来获得对象的关联实例或者关联集合;
+2.查询抓取(select):另外发送一条select语句抓取当前对象的关联实体或集合.除非显示的指定lazy=false禁止延迟抓取,否则只有当真正访问关联关系的时候才会
+执行第二条select语句;
+3.子查询抓取:(subselect):另外发送一条select语句抓取在前面查询到的(或者抓取到的)所有实体对象的关联集合.除非显示的指定lazy=false禁止延迟抓取,否则
+只有当真正访问关联关系的时候才会执行第二条select语句;
+4.批量抓取(batch):对查询抓取的优化方案,通过指定一个主键或外键列表,hibernate使用单条select语句获取一批对象实例或集合.
