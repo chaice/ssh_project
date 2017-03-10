@@ -15,6 +15,8 @@ redis是一个key-value存储系统,支持的存储类型包括:string,list,set,
   make
   二进制文件是在编译完成后在src目录下,通过redis-server命令来启动redis服务,通过redis-cli进行使用
   
+  给redis中的键设置时间 expire key_name
+  
 2.redis数据类型 支持五种数据类型 string(字符串),hash(哈希),list(列表),set(集合),zset(sorted set:有序集合)
   ①.string  redis最基本的类型,一个key对应一个value,二进制安全的,可以包含任何数据,比如jpg图片或序列化的对象,一个键最大能存储512MB
   set key_name value 设置指定key的值
@@ -23,6 +25,8 @@ redis是一个key-value存储系统,支持的存储类型包括:string,list,set,
   getset key_name value 将给定的key设置为value,并返回旧值
   mget key1 [key...] 获取所有给定key的值
   append key_name value 将value追加到原来key值的末尾
+  incr key_name 将字符串解析为整数,并增加1
+  incrby key_name num 将字符串解析为正数,并增加num
   ②.hash 是一个键值对集合,是一个string类型的field和value的映射表,适合用于存储对象.每个hash可以存储2^32-1键值对
   HMSET key_name key value [key value ...] 为一个或多个键设置值
   HMGET ket_name key [key...] 获取一个或多个键的值
@@ -34,7 +38,7 @@ redis是一个key-value存储系统,支持的存储类型包括:string,list,set,
   HGETALL key_name 获取包含的所有键值对
   HINCRBY key_name key increment 将key保存的值加上整数inrement
   HINCRBYFLOAT key_name key increment 将key保存的值加上浮点数increment
-  ③.list 简单的字符串列表,按照插入顺序排序,可以添加一个元素到列表的左边或右边,最多可存储2^32-1个元素
+  ③.list 简单的字符串列表,按照插入顺序排序,可以添加一个元素到列表的左边或右边,最多可存储2^32-1个元素.redis中的列表是使用链实现的
   rpush key_name value [value...] 将一个或多个值推入到列表的右端
   lpush key_name value [value...] 将一个或多个值推入到列表的左端
   rpop key_name 移除并返回列表最右端的元素
@@ -65,5 +69,12 @@ redis是一个key-value存储系统,支持的存储类型包括:string,list,set,
   publish channel_name message 将消息发送到指定的频道
   subscribe channel_name 订阅给定的一个或多个频道
   unsubscribe channel_name 退订给定的频道
+  
+  #redis分片
+  就是将数据拆分到多个redis实例的过程,这样每个实例将只包含所有键的子集.
+  分片的目标:
+  1.允许使用很多电脑的内存总和来支持更大的数据库.没有分片就被局限单机能支持的内存容量;
+  2.允许伸缩计算机能力到多核或多服务器,伸缩网络带宽到多服务器或多网络适配器
+  
   
   
