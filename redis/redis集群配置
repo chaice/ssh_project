@@ -1,0 +1,42 @@
+1.下载redis
+wget http://download.redis.io/releases/redis-3.0.5.tar.gz
+2.解压
+tar zxvf redis-3.0.5.tar.gz
+3.安装
+cd redis-3.0.5
+make && make install
+4.复制
+将src中的redis-trib.rb复制到/usr/local/bin
+5开始搭建集群
+mkdir redis-cluster
+ mkdir 7000 7001 7002 7003 7004 7005
+修改配置文件redis.conf
+port 7000
+pidfile /var/run/redis-7000.pid
+dbfilename dump-7000.rdb
+appendfilename "appendonly-7000.aof"
+cluster-config-file nodes-7000.conf
+cluster-enabled yes
+cluster-node-timeout 5000
+appendonly yes
+6.cp 配置文件,并修改端口
+cp redis.conf redis-cluster/7000/
+cp redis.conf redis-cluster/7001/
+cp redis.conf redis-cluster/7002/
+cp redis.conf redis-cluster/7003/
+cp redis.conf redis-cluster/7004/
+cp redis.conf redis-cluster/7005/
+修改端口
+sed -i "s/7000/7001/g" redis-cluster/7001/redis.conf
+sed -i "s/7000/7002/g" redis-cluster/7002/redis.conf
+sed -i "s/7000/7003/g" redis-cluster/7003/redis.conf
+sed -i "s/7000/7004/g" redis-cluster/7004/redis.conf
+sed -i "s/7000/7005/g" redis-cluster/7005/redis.conf
+7.安装ruby
+apt-get install ruby
+8.连接ruby和redis
+gem install redis
+9.配置集群
+redis-trib.rb create --replicas 1 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005
+10.测试集群的状态
+redis-trib.rb check 127.0.0.1:7000
