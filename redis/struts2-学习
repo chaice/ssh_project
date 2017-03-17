@@ -1,0 +1,36 @@
+<!--
+    每个package都有一个name属性,该属性可以被其他的package引用
+    namespace是可选的,如果没有给出,则以/为默认,想要调用这个包里的action,
+    就必须把这个属性所定义的命名空间添加到url中
+    extends,package通常要对struts-default.xml文件里定义的struts-default包进行扩展,
+    这样做以后,包里的所有动作就可以使用在struts-default.xml文件里的结果类型和拦截器了
+    -->
+    <package name="action" namespace="/" extends="struts-default">
+        <!--
+        每个action都有一个name属性,该属性和path之间存在着一一对应的关系
+        class属性是可选的,如果没有配置,struts将把com.opensymphony.xwork2.ActionSupport作为其
+        默认值,如果配置了class,还可以使用method配置该类的一个动作方法,method属性的默认值是execute
+        -->
+        <!--通配符映射
+        通配符映射规则:1.找到多个匹配,没有通配符的胜出;2.若指定的动作不存在,struts将会尝试把这个url与
+        任何一个包含着通配符*的动作名进行匹配;3.被通配符匹配到的url字符串的子串可以用{1},{2}来引用,{1}匹配
+        第一个字符串,{2}匹配第二个字符串;4.{0}匹配整个url;5.若Struts找到的通配符的匹配不止一个,则按先后顺序
+        进行匹配;6.*可以匹配零个或多个字符,但不包括/.如果要把/包含在内需要使用**.需要对某个字符进行转义,使用\
+        -->
+        <action name="login" class="com.ccit.action.LoginAction" method="login()">
+            <!--
+            它告诉struts在完成动作之后把控制权转交到哪里
+            result中的name属性建立result与action方法返回值之间的映射关系
+            type属性负责指定结果类型,type属性的值必须是包含在当前包或者是当前包的父包里注册过的结果类型
+            默认是dispatcher
+            -->
+            <result name="success" type="dispacter"></result>
+                <!--result的返回类型
+                1.dispatcher,把控制权转发给应用程序里的指定资源
+                2.redirect,把响应重定向到另一个资源,而不是转发
+                3.redirectAction,把响应重定向到另一个action
+                4.chain,构成一个action链:前一个action把控制权转发给后一个action,而前一个actin的状态在后一个依然保持
+                -->
+        </action>
+    </package>
+    
