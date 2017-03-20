@@ -1,0 +1,7 @@
+#mybatis的事务管理
+mybatis将事务抽象成了Transaction接口,其中定义了获取Connection连接,commit,rollback,close的功能.
+具体的实现有两种形式:
+1.JdbcTransaction,使用jdbc的事务管理机制,使用Connection对象完成对事务的提交,回滚,关闭等功能.
+2.ManagedTransaction,自身不会去实现事务管理,而是让程序的服务容器来实现对事务的管理.
+#事务的配置,创建,使用
+在mybatis的配置文件中定义<transactionManager type="JDBC" />//jdbc:使用jdbc事务管理机制;managed:使用web容器管理事务
