@@ -1,3 +1,17 @@
+多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量所发出的方法调用在编程时并不确定,而是在运行期间才会确定,即一个引用变量到底会指向哪个类的实例.
+native方法表示该方法需要依赖另外一种平台语言才能实现,不存在着被子类访问的问题.
+synchronized使用在一个具体的方法上才有意义,而且所使用的的的同步锁是this,而抽象方法无法确定this是什么.
+可以存储和操作字符串,,即包含多个字符的字符数据,string类提供了数值不可改变的字符串.而stringBuffer类的字符串可以进行修改.
+return调用先于finally,finally中的代码比return和break后执行.
+运行时异常表示虚拟机的通常操作中可能遇到的异常,是一种常见的错误.
+hashmap是hashtable的轻量级实现,都完成了map接口,hashmap允许null的key或者value,而hashtable不可以,hashmap把hashtable中的contains方法去掉了,改成
+containsValue和containsKey,hashtable基于陈旧的dictionary类,而hashmap是map接口的一个实现.
+java对象从一个字节流恢复成一个java对象,实现searializable接口的类,javac在编译时会进行特殊处理,编译的类才可以被writeObject方法操作.
+类的装载是由ClassLoader和它的子类类实现的,负责在运行时装载和查找类文件.
+#heap(堆)&&stack(栈)
+java中内存分为堆内存和栈内存,栈内存是指程序进入一个方法时,会为这个方法单独分配一块私有的存储空间,用于存储这个方法内部的局部变量,当这个方法结束后,分配给
+这个方法的栈会释放,这个栈中的变量也将随之释放.
+堆一般存放不放在当前方法栈中的数据,new创建的对象都放在堆里,方法中的局部变量使用final修饰后,放在堆中而不是栈中.
 web应用就是通过http协议对网页浏览器发送的请求进行响应的服务器或服务.
 一个web服务器对请求响应的典型步骤:
 1.服务器对客户端发来的请求进行解析
