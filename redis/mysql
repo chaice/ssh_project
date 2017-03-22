@@ -1,1 +1,31 @@
+临时更改命令行使用程序分隔符 delimiter //
+#除去表中的数据而不除去表本身 truncate table 表名称
+#创建表
+create table table_name(
+id int primary key auto_increment not null,
+firstname varchar(50),
+lastname varchar(50),
+constraint 约束名 forign key (列名) references 外键表(列名)
+)
+#修改表
+alter table table_name add/drop
+#constraint
+check约束用于限制列中值得范围  constraint 约束名 check (列名+范围)
+default约束用来向列中插入默认值, default current_timestamp
+#index 创建索引
+create index 索引名 on 表名 (列名1,列名2)//创建多个索引
+撤销索引 alter table 表名 drop index 索引名
+#创建视图
+create or replace view  视图名 as
+#触发器
+触发器是数据库的回调函数,它会自动执行/指定的数据库事件发生时调用,可以指定特定的数据库表在发生delete,insert,update时触发,或在一个或多个指定表的列更新时
+触发,当触发器相关联的表删除时,自动删除触发器
+create trigger 触发器名 [before|after] insert/delete/update on 表名 begin ..... end;
+#存储过程 关键字out指响应参数从存储过程传出一个值,in指传递给存储过程,inout对存储过程传入和传出,保存到相应的变量into
+create procedure 存储过程名()
+begin
+
+end;
+#删除存储过程
+drop procedure 存储过程名;
 #explain
