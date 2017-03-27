@@ -33,4 +33,27 @@
                 -->
         </action>
     </package>
-    
+#struts2实现返回json
+1.使用response 对应的action <action name="" method="" class=""></action>
+  response.setContentType("text/html;charset=utf-8");
+  PrintWriter writer = response.getWriter();
+  writer.writer(str);
+  writer.flush();writre.close();
+  return NONE;
+2.使用result type="stream"
+ inputStream = new ByteArrayInputStream(str.getBytes("utf-8"));
+ return "success";
+ 对应的action
+ <action name="" class="" mehtod="">
+    <result type="stream" name="">
+        <param name="contentType">text/html;utf-8</param>
+        <param name="inputName">inputStream</param>
+    </result>
+ </action>
+3.struts2 json插件  struts2-json-plugin
+ 在action类中添加json的属性,在方法中给属性赋值
+ 对应的action package中的extends添加json-default
+ <action name="" class="" method="">
+    <result name="" type="json"></result>
+ </action>
+   
