@@ -1,0 +1,31 @@
+#修改nginx配置文件,nginx.conf
+在配置文件中加
+location ~ \.jsp$ {
+   index  index.jsp;
+   proxy_pass  http://127.0.0.1:8080;
+   #proxy_redirect off;
+   proxy_set_header  Host $host;
+   proxy_set_header  X-Real-IP $remote_addr;
+   proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+   client_max_body_size  10m;
+   client_body_buffer_size  128k;
+   proxy_connect_timeout  90;
+   proxy_read_timeout  90;
+   proxy_buffer_size  4k;
+   proxy_buffers  6 32k;
+   proxy_busy_buffers_size  64k;
+  proxy_temp_file_write_size  64k;
+}
+#为了能够访问静态资源
+location ~ \.(html|js|css|gif|jpg|png|bmp|swf)$ {       
+   expires 30d;                                        
+   root /home/ubuntu/apache-tomcat-7.0.73/webapps/ROOT;#静态资源目录
+}
+#负载均衡
+upstream backend_tomcat{      
+   server 127.0.0.1:8080;     
+   server 123.207.24.237:8080;
+}
+location / {
+  proxy_pass http:backend_tomcat;
+}
